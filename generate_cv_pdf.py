@@ -1,13 +1,13 @@
 #!/usr/bin/env python3
 """
-CV Generator
+CV PDF Generator
 Generates a PDF CV using ReportLab and data from a JSON file.
 
 Requirements:
     pip install reportlab pillow
 
 Usage:
-    python3 generate_cv.py cv_toni_tassani.json
+    python3 generate_cv_pdf.py cv_toni_tassani.json
 
 The JSON file is resolved relative to this script unless an absolute path is used.
 Font files should be in a 'fonts/' folder next to this script
@@ -39,13 +39,13 @@ except ModuleNotFoundError as exc:
     sys.exit(1)
 
 # ─────────────────────────────────────────────────────────────────────────────
-# PATHS  — adjust if your folder structure differs
+# PATHS
 # ─────────────────────────────────────────────────────────────────────────────
-SCRIPT_DIR  = os.path.dirname(os.path.abspath(__file__))
-FONTS_DIR   = os.path.join(SCRIPT_DIR, "fonts")
+SCRIPT_DIR = os.path.dirname(os.path.abspath(__file__))
+FONTS_DIR  = os.path.join(SCRIPT_DIR, "fonts")
 
 # ─────────────────────────────────────────────────────────────────────────────
-# COLOURS
+# COLOURS  (match HTML template variables exactly)
 # ─────────────────────────────────────────────────────────────────────────────
 NAVY  = HexColor("#1a2e47")
 BLUE  = HexColor("#3a7fc1")
@@ -53,11 +53,15 @@ MUTED = HexColor("#666666")
 TEXT  = HexColor("#2c2c2c")
 RULE  = HexColor("#dde3ec")
 WHITE = white
-ICON_GREY = HexColor("#888888")
+
+# Sidebar rule line: rgba(255,255,255,.22)  →  hex opacity 0x38 = 56 ≈ 0.22
+SIDE_RULE = HexColor("#ffffff38")
+
+# Icons use the same muted grey as contact text (#666666)
+ICON_COLOR = MUTED
 
 # ─────────────────────────────────────────────────────────────────────────────
-# ICON PATHS  (extracted from Enhancv resumeicons font, unitsPerEm=512)
-# phone=CID 0x0013, email=CID 0x0020, link=CID 0x00C8, location=CID 0x00F3
+# ICON PATHS  (SVG, unitsPerEm=512)
 # ─────────────────────────────────────────────────────────────────────────────
 ICON_PATHS = {
     "phone": (
@@ -125,26 +129,18 @@ ICON_PATHS = {
     ),
 }
 
-ICON_UPM = 512  # font units per em
+ICON_UPM = 512
 
 
-def draw_icon(c, name, x, y, size, color=ICON_GREY):
-    """
-    Draw an icon glyph at (x, y) baseline, scaled to `size` points.
-    The glyph coordinate system is flipped (Y increases downward in font space),
-    so we apply a combined scale + Y-flip transform.
-    """
+def draw_icon(c, name, x, y, size, color=None):
+    if color is None:
+        color = ICON_COLOR
     scale = size / ICON_UPM
     path_str = ICON_PATHS[name]
 
     c.saveState()
     c.setFillColor(color)
     c.setStrokeColor(color)
-
-    # Transform: scale and flip Y so glyph sits on baseline at (x, y)
-    # Font Y=0 is baseline, Y=UPM is top — but glyph data has Y increasing upward.
-    # The PDF content stream used "1 0 0 -1 ... Tm" (Y-flip matrix).
-    # Replicate: translate to (x, y+size), scale by (scale, -scale).
     c.transform(scale, 0, 0, -scale, x, y + size * 0.85)
 
     p = c.beginPath()
@@ -154,7 +150,6 @@ def draw_icon(c, name, x, y, size, color=ICON_GREY):
 
 
 def _parse_svg_path(path, d):
-    """Parse a minimal SVG path string (M, L, Q, Z) into a ReportLab path."""
     import re
     tokens = re.findall(r'[MLQZ]|[-+]?\d*\.?\d+', d)
     i = 0
@@ -170,7 +165,6 @@ def _parse_svg_path(path, d):
         elif cmd == 'Q':
             x1, y1 = float(tokens[i]), float(tokens[i+1]); i += 2
             x2, y2 = float(tokens[i]), float(tokens[i+1]); i += 2
-            # Convert quadratic bezier to cubic
             cpx1 = cx + 2/3 * (x1 - cx)
             cpy1 = cy + 2/3 * (y1 - cy)
             cpx2 = x2 + 2/3 * (x1 - x2)
@@ -259,7 +253,6 @@ def load_cv_data(json_path):
 # ─────────────────────────────────────────────────────────────────────────────
 
 def prepare_photo(src_path, out_path):
-    """Crop photo to a square and save as PNG with circular mask."""
     img = Image.open(src_path).convert("RGBA")
     w, h = img.size
     side = min(w, h)
@@ -278,17 +271,17 @@ def prepare_photo(src_path, out_path):
 # ─────────────────────────────────────────────────────────────────────────────
 # PAGE GEOMETRY
 # ─────────────────────────────────────────────────────────────────────────────
-W, H        = A4
-SIDE_W      = W * 0.37
-MAIN_W      = W - SIDE_W
-PAD_TOP     = 9 * mm
-PAD_BOT     = 8 * mm
-PAD_ML      = 10 * mm
-PAD_MR      = 7 * mm
-PAD_SL      = 7 * mm
-PAD_SR      = 7 * mm
-MAIN_TW     = MAIN_W - PAD_ML - PAD_MR
-SIDE_TW     = SIDE_W - PAD_SL - PAD_SR
+W, H    = A4
+SIDE_W  = W * 0.37
+MAIN_W  = W - SIDE_W
+PAD_TOP = 9 * mm
+PAD_BOT = 8 * mm
+PAD_ML  = 11 * mm   # left padding of main column (matches HTML 11mm)
+PAD_MR  = 8 * mm    # right padding of main column
+PAD_SL  = 8 * mm    # left padding of sidebar (matches HTML 8mm)
+PAD_SR  = 8 * mm    # right padding of sidebar
+MAIN_TW = MAIN_W - PAD_ML - PAD_MR
+SIDE_TW = SIDE_W - PAD_SL - PAD_SR
 
 
 # ─────────────────────────────────────────────────────────────────────────────
@@ -315,8 +308,9 @@ def wrap_text(text, font, size, max_w):
 class CV:
     def __init__(self, output_path):
         self.c   = canvas.Canvas(output_path, pagesize=A4)
-        self.my  = H - PAD_TOP   # main col cursor
-        self.sy  = H - PAD_TOP   # sidebar cursor
+        self.my  = H - PAD_TOP
+        self.sy  = H - PAD_TOP
+        self._msec_count = 0   # track section calls to skip top gap on first
         self._paint_sidebar()
 
     def _paint_sidebar(self):
@@ -344,17 +338,18 @@ class CV:
         self.c.setFillColor(WHITE)
         self.c.drawString(MAIN_W + PAD_SL, self.sy, title.upper())
         self.sy -= 1.5 * mm
-        self.c.setStrokeColor(HexColor("#ffffff44"))
+        self.c.setStrokeColor(SIDE_RULE)
         self.c.setLineWidth(0.5)
         self.c.line(MAIN_W + PAD_SL, self.sy, W - PAD_SR, self.sy)
         self.sy -= 4 * mm
 
     def spara(self, text, size=8.5, color=None, gap=5):
         if color is None:
-            color = HexColor("#ffffffcc")
+            # rgba(255,255,255,.82) → #ffffffd1
+            color = HexColor("#ffffffd1")
         self.c.setFont("OpenSans-Regular", size)
         self.c.setFillColor(color)
-        lh = size * 1.55
+        lh = size * 1.65
         for line in wrap_text(text, "OpenSans-Regular", size, SIDE_TW):
             self.c.drawString(MAIN_W + PAD_SL, self.sy, line)
             self.sy -= lh
@@ -366,11 +361,12 @@ class CV:
         self.c.setFillColor(WHITE)
         for line in wrap_text(name, "Raleway-SemiBold", 8.5, SIDE_TW):
             self.c.drawString(sx, self.sy, line)
-            self.sy -= 8.5 * 1.3
+            self.sy -= 8.5 * 1.35
         self.c.setFont("OpenSans-Regular", 7.5)
-        self.c.setFillColor(HexColor("#ffffff88"))
+        # rgba(255,255,255,.55) → #ffffff8c
+        self.c.setFillColor(HexColor("#ffffff8c"))
         self.c.drawString(sx, self.sy, issuer)
-        self.sy -= 7.5 * 1.3 + 2
+        self.sy -= 7.5 * 1.35 + 2.5 * mm
 
     def slang(self, name, level, dots, total=5):
         sx = MAIN_W + PAD_SL
@@ -378,13 +374,15 @@ class CV:
         self.c.setFillColor(WHITE)
         self.c.drawString(sx, self.sy, name)
         self.c.setFont("OpenSans-Regular", 7.5)
-        self.c.setFillColor(HexColor("#ffffff88"))
+        # rgba(255,255,255,.55)
+        self.c.setFillColor(HexColor("#ffffff8c"))
         self.c.drawString(sx + 38 * mm, self.sy, level)
         dr = 2.5; dg = 6.5
         dx = W - PAD_SR - total * dg
         dy = self.sy - dr + 1.5
         for i in range(total):
-            self.c.setFillColor(WHITE if i < dots else HexColor("#ffffff33"))
+            # empty dot: rgba(255,255,255,.22) → #ffffff38
+            self.c.setFillColor(WHITE if i < dots else HexColor("#ffffff38"))
             self.c.circle(dx + i * dg, dy, dr, fill=1, stroke=0)
         self.sy -= 9 * 1.6
 
@@ -394,12 +392,19 @@ class CV:
         self.c.setFillColor(WHITE)
         self.c.drawString(sx, self.sy, label)
         self.sy -= 8 * 1.3
-        self.spara(tags, size=7.5, gap=4)
+        # rgba(255,255,255,.65) → #ffffffa6
+        self.spara(tags, size=7.5, color=HexColor("#ffffffa6"), gap=3.5 * mm)
 
     # ── Main column helpers ──────────────────────────────────────────
 
     def msec(self, title):
-        self.my -= 1.5 * mm
+        # Leave 5mm before each section header (skip on first call)
+        if self._msec_count == 0:
+            self.my -= 0 * mm
+        else:
+            self.my -= 5 * mm
+        self._msec_count += 1
+
         self.c.setFont("Raleway-Bold", 11.5)
         self.c.setFillColor(NAVY)
         self.c.drawString(PAD_ML, self.my, title.upper())
@@ -407,22 +412,21 @@ class CV:
         self.c.setStrokeColor(RULE)
         self.c.setLineWidth(0.8)
         self.c.line(PAD_ML, self.my, MAIN_W - PAD_MR, self.my)
-        self.my -= 4.5 * mm
+        self.my -= 3.5 * mm
 
     def mjob(self, role, dates, company, location, desc=None, bullets=None):
-        # rough height estimate for page-break check
         est = max(1, len(role) // 42) * 10 * 1.3 + 9 * 1.4
         if desc:
             est += max(1, len(desc) // 68) * 8 * 1.5
         if bullets:
-            est += sum(max(1, len(b) // 72) * 8.5 * 1.5 for b in bullets)
+            est += sum(max(1, len(b) // 72) * 8.5 * 1.6 for b in bullets)
         self.check_main(min(est, 45 * mm))
 
         # role + dates
-        dw   = SW(dates, "OpenSans-Regular", 8)
-        rw   = MAIN_TW - dw - 3
+        dw    = SW(dates, "OpenSans-Regular", 8)
+        rw    = MAIN_TW - dw - 3
         rlines = wrap_text(role, "Raleway-SemiBold", 10, rw)
-        lh_r = 10 * 1.3
+        lh_r  = 10 * 1.3
         self.c.setFont("Raleway-SemiBold", 10)
         self.c.setFillColor(NAVY)
         for i, line in enumerate(rlines):
@@ -453,7 +457,7 @@ class CV:
         if bullets:
             indent = 3.5 * mm
             btw    = MAIN_TW - indent - 1.5 * mm
-            lh     = 8.5 * 1.5
+            lh     = 8.5 * 1.6
             for b in bullets:
                 blines = wrap_text(b, "OpenSans-Regular", 8.5, btw)
                 if self.my - len(blines) * lh < PAD_BOT + 10 * mm:
@@ -465,10 +469,10 @@ class CV:
                     self.c.drawString(PAD_ML + indent, self.my - j * lh, line)
                 self.my -= len(blines) * lh
 
-        self.my -= 3 * mm
+        self.my -= 4.5 * mm   # gap between jobs (~12px in HTML)
 
     def medu(self, degree, school, location, year):
-        self.check_main(12 * mm)
+        self.check_main(14 * mm)
         self.c.setFont("Raleway-SemiBold", 10)
         self.c.setFillColor(NAVY)
         self.c.drawString(PAD_ML, self.my, degree)
@@ -477,13 +481,13 @@ class CV:
         self.c.setFillColor(BLUE)
         self.c.drawString(PAD_ML, self.my, school)
         lw = SW(location, "OpenSans-Regular", 8)
-        yw = SW(year,     "OpenSans-Regular", 8)
         self.c.setFont("OpenSans-Regular", 8)
         self.c.setFillColor(MUTED)
         self.c.drawString(PAD_ML + MAIN_TW - lw, self.my, location)
         self.my -= 8.5 * 1.35
+        yw = SW(year, "OpenSans-Regular", 8)
         self.c.drawString(PAD_ML + MAIN_TW - yw, self.my, year)
-        self.my -= 8 * 1.4 + 2 * mm
+        self.my -= 8 * 1.4 + 2.5 * mm
 
 
 # ─────────────────────────────────────────────────────────────────────────────
@@ -496,7 +500,6 @@ def main():
 
     register_fonts()
 
-    # Prepare circular photo
     tmp_photo = os.path.join(SCRIPT_DIR, "_photo_circle.png")
     prepare_photo(data["photo_path"], tmp_photo)
 
@@ -504,14 +507,14 @@ def main():
     c  = cv.c
 
     # ── SIDEBAR ──────────────────────────────────────────────────────
-    sx = MAIN_W + PAD_SL
 
-    # Photo
-    photo_d = 26 * mm
+    # Photo: 32mm as in HTML template (was 26mm)
+    photo_d = 32 * mm
     px = MAIN_W + (SIDE_W - photo_d) / 2
     py = cv.sy - photo_d
-    c.setFillColor(WHITE)
-    c.circle(px + photo_d / 2, py + photo_d / 2, photo_d / 2 + 1.5, fill=1, stroke=0)
+    # Border: rgba(255,255,255,.35) → #ffffff59
+    c.setFillColor(HexColor("#ffffff59"))
+    c.circle(px + photo_d / 2, py + photo_d / 2, photo_d / 2 + 2, fill=1, stroke=0)
     c.saveState()
     p = c.beginPath()
     p.circle(px + photo_d / 2, py + photo_d / 2, photo_d / 2)
@@ -519,7 +522,7 @@ def main():
     c.drawImage(tmp_photo, px, py, photo_d, photo_d,
                 preserveAspectRatio=True, mask="auto")
     c.restoreState()
-    cv.sy -= photo_d + 6 * mm
+    cv.sy -= photo_d + 8 * mm   # 8mm gap below photo (matches HTML margin-bottom: 8mm)
 
     cv.ssec("Summary")
     cv.spara(data["summary"], size=8.5, gap=3)
@@ -536,29 +539,30 @@ def main():
     for language in data["languages"]:
         cv.slang(language["name"], language["level"], language["dots"])
 
-    cv.sy -= 1 * mm
+    cv.sy -= 1.5 * mm
     cv.ssec("Skills")
     for skill in data["skills"]:
         cv.sskill(skill["label"], skill["tags"])
 
     # ── MAIN COLUMN ──────────────────────────────────────────────────
 
-    # Name
-    c.setFont("Raleway-ExtraBold", 26)
+    # Name: 28pt as in HTML template
+    c.setFont("Raleway-ExtraBold", 28)
     c.setFillColor(NAVY)
     c.drawString(PAD_ML, cv.my, data["name"])
-    cv.my -= 26 * 1.1
+    cv.my -= 28 * 1.1
 
-    c.setFont("Raleway-Regular", 14)
+    # Title: 16pt as in HTML template
+    c.setFont("Raleway-Regular", 16)
     c.setFillColor(BLUE)
     c.drawString(PAD_ML, cv.my, data["title"])
-    cv.my -= 14 * 1.4
+    cv.my -= 16 * 1.4
 
-    # Contacts with icons
+    # Contacts with icons — 9pt to match HTML 11pt visual weight
     icon_size = 9
-    icon_gap  = 2 * mm
     text_size = 8.5
-    row_h     = text_size * 1.5
+    row_h     = text_size * 1.9   # line-height: 1.9 from HTML template
+    gap_item  = 6                 # gap between items in same row (pts)
     c.setFont("OpenSans-Regular", text_size)
 
     rows = [
@@ -568,23 +572,22 @@ def main():
     for row in rows:
         cx = PAD_ML
         for icon_name, label in row:
-            # Draw icon
-            draw_icon(c, icon_name, cx, cv.my, icon_size, ICON_GREY)
+            draw_icon(c, icon_name, cx, cv.my, icon_size)
             cx += icon_size + 1.5 * mm
-            # Draw text
             c.setFont("OpenSans-Regular", text_size)
             c.setFillColor(MUTED)
             c.drawString(cx, cv.my, label)
-            cx += SW(label, "OpenSans-Regular", text_size) + icon_gap
+            cx += SW(label, "OpenSans-Regular", text_size) + gap_item + 3 * mm
         cv.my -= row_h
 
-    cv.my -= 2.5 * mm
+    # Name-block bottom border: margin-bottom 7mm, padding-bottom 5mm from HTML
+    cv.my -= 5 * mm
 
-    # Rule
+    # Rule — 2pt weight matching HTML border-bottom: 2px
     c.setStrokeColor(NAVY)
-    c.setLineWidth(1.2)
+    c.setLineWidth(1.5)
     c.line(PAD_ML, cv.my, MAIN_W - PAD_MR, cv.my)
-    cv.my -= 4.5 * mm
+    cv.my -= 7 * mm   # space after rule before first section
 
     # Experience
     cv.msec("Experience")
