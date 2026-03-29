@@ -369,10 +369,10 @@ class CV:
         for line in wrap_text(name, "Raleway-SemiBold", 9, SIDE_TW):
             self.c.drawString(sx, self.sy, line)
             self.sy -= 9 * 1.35
-        self.c.setFont("OpenSans-Regular", 8)
+        self.c.setFont("OpenSans-Regular", 8.5)
         self.c.setFillColor(SIDE_MUTED)
         self.c.drawString(sx, self.sy, issuer)
-        self.sy -= 8 * 1.35 + 2 * mm   # extra gap between entries
+        self.sy -= 8.5 * 2   # match spara line-height for consistent rhythm
 
     def slang(self, name, level, dots, total=5):
         """Sidebar language row with dot-score on the right."""
