@@ -1,0 +1,228 @@
+{
+  "name": "TONI TASSANI",
+  "title": "VP of Engineering",
+  "photo_path": "profile_tonitassani.jpeg",
+  "output_pdf": "cv_toni_tassani.pdf",
+  "contact": {
+    "phone": "+34688418191",
+    "email": "toni.tassani@gmail.com",
+    "linkedin": "linkedin/in/tonitassani",
+    "website": "humblyproud.com",
+    "location": "Barcelona"
+  },
+  "summary": "Technology leader who bridges engineering excellence and human dynamics. Combines experience in software architecture and delivery with coaching, facilitation, and organisational design. Brings clarity to complex problems, strengthens team effectiveness, and builds environments where engineers can perform at their best while maintaining strong focus on outcomes, risk, and business impact.",
+  "experience": [
+    {
+      "role": "Deputy CTO / VP of Engineering Practices and Application Security",
+      "dates": "05/2019 – 01/2022",
+      "company": "Ocado Technology",
+      "location": "Barcelona",
+      "desc": "Ocado Technology provides the Ocado Smart Platform (OSP)—an end-to-end automation and e-commerce solution—to 13 international retail partners. ~2,500 technologists across 8 locations; 3,000+ patents in AI-driven logistics.",
+      "bullets": [
+        "Reporting to the CTO; part of the Engineering Productivity stream",
+        "Identifying best engineering practices and extending them across the organisation",
+        "Responsible for Application Security, Lean and Agile, and the SDLC",
+        "Leading adoption of Gen AI for Software Engineering (trials, metrics, alignment, enablement)",
+        "Leading the Application Security function (~20 people), 4 Engineering Practice Leads, an Accessibility expert and an Agile Coach",
+        "Measuring proxies to Engineering Productivity and Developer Experience, qualitatively and quantitatively",
+        "Working with Cloud teams and SRE to find finance optimisations in cloud consumption",
+        "Supervising compliance and cost of applications and processes for SOC 2"
+      ]
+    },
+    {
+      "role": "Catalyst",
+      "dates": "01/2018 – 05/2019",
+      "company": "Ocado Technology",
+      "location": "Barcelona",
+      "bullets": [
+        "Member of the Catalysts team focusing on Culture, Effectiveness and Efficiency using Agile and Lean tools",
+        "From March to May 2019, assignment as Software Development Manager of Platform Services"
+      ]
+    },
+    {
+      "role": "Agile Coach",
+      "dates": "2015 – 01/2018",
+      "company": "eDreams ODIGEO",
+      "location": "Barcelona",
+      "desc": "Online Travel Agency with 1,700 employees, 400+ in IT, headquartered in Barcelona.",
+      "bullets": [
+        "Led Agile transformation with a group of 10 coaches; Kanban with support from David J. Anderson",
+        "Rolled out to 50+ development teams; coached 14 teams (max 4 at a time)",
+        "Applied Kanban in non-IT teams: Learning & Development and Help Desk",
+        "Taught Kanban, Social Styles, effective feedback, visual communication, and other topics",
+        "Supported the DevOps group continuous improvement; navigated team conflicts; coached individuals",
+        "Re-organisational design with Dev Managers; kick-start with 80 participants (McKinsey support)",
+        "Built a Kanban maturity visualisation tool using JavaScript / D3.js",
+        "Conducted Impact Mapping sessions with POs; identified Value Streams; presented agile plan to C-suite"
+      ]
+    },
+    {
+      "role": "Lecturer (part-time)",
+      "dates": "10/2014 – Present",
+      "company": "La Salle",
+      "location": "Barcelona"
+    },
+    {
+      "role": "Consultant",
+      "dates": "01/2015 – 10/2015",
+      "company": "Everis",
+      "location": "Barcelona",
+      "bullets": [
+        "Software Architecture group — La Caixa (banking) and UOC (university)",
+        "Software architecture, Continuous Delivery and API Management",
+        "Supported one team in improving Agile processes and technical practices"
+      ]
+    },
+    {
+      "role": "Solutions Architect",
+      "dates": "03/2012 – 01/2015",
+      "company": "Thomson Reuters",
+      "location": "Barcelona",
+      "desc": "Life Sciences division (now Clarivate Analytics) — drug design data for the Pharma industry.",
+      "bullets": [
+        "Developed and deployed Cortellis; progressed from Lead Senior Analyst Programmer to Solutions Architect",
+        "Built data APIs, Web Services and Applications in Java and Scala",
+        "Collaborated with emerging DevOps department; facilitated meetings; trained distributed teams",
+        "Transitioned methodologies to DSDM Atern and Scrum"
+      ]
+    },
+    {
+      "role": "Software Developer",
+      "dates": "03/2010 – 03/2012",
+      "company": "Omatech",
+      "location": "Barcelona",
+      "bullets": [
+        "Consultant for Thomson Reuters Barcelona following the acquisition of Prous Science",
+        "Trained the development team in modern practices and Java; helped with Agile transition",
+        "Assisted in building a web application for Pharma scientists"
+      ]
+    },
+    {
+      "role": "Development Manager & Architect",
+      "dates": "2004 – 2010",
+      "company": "Stacks Consulting",
+      "location": "Barcelona",
+      "bullets": [
+        "Development Manager and Architect; team of 15 across Barcelona and Madrid",
+        "Set up new Java development department; built Primary Care management web app for Madrid"
+      ]
+    },
+    {
+      "role": "Lecturer (part-time)",
+      "dates": "2003 – 2012",
+      "company": "Universitat Oberta de Catalunya (UOC)",
+      "location": "Barcelona",
+      "bullets": [
+        "Part-time Lecturer in database subjects at the Open University (distance learning)"
+      ]
+    },
+    {
+      "role": "Consultant",
+      "dates": "1996 – 2004",
+      "company": "Oracle Consulting",
+      "location": "Barcelona",
+      "bullets": [
+        "Developed and managed on-site projects — Web, Java and Oracle Databases; teams up to 5 people"
+      ]
+    }
+  ],
+  "education": [
+    {
+      "degree": "Computers Engineer (Ingeniero en Informática)",
+      "school": "Facultat d'Informàtica de Barcelona – Universitat Politècnica de Catalunya",
+      "location": "Barcelona",
+      "year": "09/1997"
+    },
+    {
+      "degree": "Postgraduate in Agile Methods for Product Development (PMA)",
+      "school": "BES La Salle – Universitat Ramon Llull",
+      "location": "Barcelona",
+      "year": "09/2013"
+    },
+    {
+      "degree": "Philosophy",
+      "school": "National University of Distance Education (UNED)",
+      "location": "Barcelona",
+      "year": "2024 – Present"
+    }
+  ],
+  "certifications": [
+    {
+      "name": "Kanban Management Professional (KMP2)",
+      "issuer": "José Casal"
+    },
+    {
+      "name": "Certified Scrum Master",
+      "issuer": "Agile Alliance, Xavier Quesada"
+    },
+    {
+      "name": "DSDM Atern Practitioner",
+      "issuer": "Dot Tudor"
+    },
+    {
+      "name": "Professional Scrum Master I",
+      "issuer": "Scrum.org"
+    },
+    {
+      "name": "Co-Active Coaching",
+      "issuer": "CTI"
+    }
+  ],
+  "training": [
+    {
+      "name": "Graphic Facilitation",
+      "issuer": "Brandy Agerbeck"
+    },
+    {
+      "name": "Cynefin Framework",
+      "issuer": "Liz Keogh"
+    },
+    {
+      "name": "Leading Agile Teams",
+      "issuer": "Angel Medinilla"
+    }
+  ],
+  "languages": [
+    {
+      "name": "Catalan",
+      "level": "Native",
+      "dots": 5
+    },
+    {
+      "name": "Spanish",
+      "level": "Native",
+      "dots": 5
+    },
+    {
+      "name": "English",
+      "level": "Proficient",
+      "dots": 4
+    }
+  ],
+  "skills": [
+    {
+      "label": "Programming Languages",
+      "tags": "Java · TypeScript · JavaScript · Scala · Python · PL/SQL · C++"
+    },
+    {
+      "label": "Methodologies & Frameworks",
+      "tags": "Agile · Lean · Scrum · Kanban · DevOps · eXtreme Programming · TDD"
+    },
+    {
+      "label": "Technology & Infrastructure",
+      "tags": "Application Security · Engineering Practices · Cloud Computing · Continuous Delivery · Data APIs · Web Services · Databases"
+    },
+    {
+      "label": "Soft Skills",
+      "tags": "Technical Leadership · Team Building · Coaching · Facilitation · Change Management · Training · Conflict Resolution"
+    },
+    {
+      "label": "Analytics & Metrics",
+      "tags": "Data Analysis · Metrics and KPIs · Product Development"
+    },
+    {
+      "label": "Creative Skills",
+      "tags": "Visual Thinking · Sketchnoting · Urbansketching"
+    }
+  ]
+}
