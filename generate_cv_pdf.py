@@ -265,8 +265,8 @@ def prepare_photo(src_path, out_path):
 W, H    = A4
 SIDE_W  = W * 0.37
 MAIN_W  = W - SIDE_W
-PAD_TOP = 9 * mm
-PAD_BOT = 8 * mm
+PAD_TOP = 20 * mm
+PAD_BOT = 10 * mm
 PAD_ML  = 11 * mm
 PAD_MR  = 8  * mm
 PAD_SL  = 8  * mm
@@ -340,7 +340,7 @@ class CV:
         else:
             self.sy -= 3 * mm   # breathing room before each subsequent section
 
-        self.c.setFont("Raleway-SemiBold", 9)
+        self.c.setFont("Raleway-SemiBold", 10)
         self.c.setFillColor(WHITE)
         self.c.drawString(MAIN_W + PAD_SL, self.sy, title.upper())
         self.sy -= 1.5 * mm
@@ -364,15 +364,15 @@ class CV:
     def scert(self, name, issuer):
         """Sidebar certification / training entry."""
         sx = MAIN_W + PAD_SL
-        self.c.setFont("Raleway-SemiBold", 8.5)
+        self.c.setFont("Raleway-SemiBold", 9)
         self.c.setFillColor(WHITE)
-        for line in wrap_text(name, "Raleway-SemiBold", 8.5, SIDE_TW):
+        for line in wrap_text(name, "Raleway-SemiBold", 9, SIDE_TW):
             self.c.drawString(sx, self.sy, line)
-            self.sy -= 8.5 * 1.35
-        self.c.setFont("OpenSans-Regular", 7.5)
+            self.sy -= 9 * 1.35
+        self.c.setFont("OpenSans-Regular", 8)
         self.c.setFillColor(SIDE_MUTED)
         self.c.drawString(sx, self.sy, issuer)
-        self.sy -= 7.5 * 1.35 + 4 * mm   # extra gap between entries
+        self.sy -= 8 * 1.35 + 2 * mm   # extra gap between entries
 
     def slang(self, name, level, dots, total=5):
         """Sidebar language row with dot-score on the right."""
@@ -386,7 +386,7 @@ class CV:
         self.c.setFillColor(WHITE)
         self.c.drawString(sx, self.sy, name)
 
-        self.c.setFont("OpenSans-Regular", 7.5)
+        self.c.setFont("OpenSans-Regular", 8)
         self.c.setFillColor(SIDE_MUTED)
         self.c.drawString(sx + 32 * mm, self.sy, level)
 
@@ -405,11 +405,11 @@ class CV:
     def sskill(self, label, tags):
         """Sidebar skill group (label + comma/dot separated tags)."""
         sx = MAIN_W + PAD_SL
-        self.c.setFont("Raleway-SemiBold", 8)
+        self.c.setFont("Raleway-SemiBold", 9)
         self.c.setFillColor(WHITE)
         self.c.drawString(sx, self.sy, label)
-        self.sy -= 8 * 1.3
-        self.spara(tags, size=7.5, color=SIDE_TAGS, gap=3 * mm)
+        self.sy -= 9 * 1.3
+        self.spara(tags, size=8, color=SIDE_TAGS, gap=3 * mm)
 
     # ── Main column helpers ──────────────────────────────────────────
 
