@@ -705,22 +705,24 @@ def main():
     c.restoreState()
     cv.sy -= photo_d + 8 * mm   # 8 mm below photo before "Summary"
 
-    cv.ssec("Summary")
+    lbl = data["labels"]
+
+    cv.ssec(lbl["summary"])
     cv.spara(data["summary"], fontSize=8.5, gapAfterPara=15)
 
-    cv.ssec("Certifications")
+    cv.ssec(lbl["certifications"])
     for cert in data["certifications"]:
         cv.scert(cert["name"], cert["issuer"])
     cv.spara("", fontSize=6.5, gapAfterPara=0)
 
 
-    cv.ssec("Training / Courses")
+    cv.ssec(lbl["training"])
     for training in data["training"]:
         cv.scert(training["name"], training["issuer"])
     cv.spara("", fontSize=6.5, gapAfterPara=0)
 
 
-    cv.ssec("Languages")
+    cv.ssec(lbl["languages"])
     for language in data["languages"]:
         cv.slang(language["name"], language["level"], language["dots"])
 
@@ -728,7 +730,7 @@ def main():
     # The callback fires the first time new_page() is called by the main column,
     # placing the Skills section at the top of the page-2 sidebar.
     def draw_skills_p2():
-        cv.ssec("Skills")
+        cv.ssec(lbl["skills"])
         for skill in data["skills"]:
             cv.sskill(skill["label"], skill["tags"])
 
@@ -780,8 +782,7 @@ def main():
     # c.line(PAD_ML, cv.my, MAIN_W - PAD_MR, cv.my)
     cv.my -= 8.5 * mm
 
-    # Experience
-    cv.msec("Experience")
+    cv.msec(lbl["experience"])
     for job in data["experience"]:
         cv.mjob(
             job["role"], job["dates"],
@@ -789,8 +790,7 @@ def main():
             desc=job.get("desc"), bullets=job.get("bullets"),
         )
 
-    # Education
-    cv.msec("Education")
+    cv.msec(lbl["education"])
     for edu in data["education"]:
         cv.medu(edu["degree"], edu["school"], edu["location"], edu["year"])
 

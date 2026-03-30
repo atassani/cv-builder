@@ -10,6 +10,15 @@
     "website": "humblyproud.com",
     "location": "Barcelona"
   },
+  "labels": {
+    "summary": "Summary",
+    "certifications": "Certifications",
+    "training": "Training / Courses",
+    "languages": "Languages",
+    "skills": "Skills",
+    "experience": "Experience",
+    "education": "Education"
+  },
   "summary": "Engineering leader at the intersection of technical excellence and human dynamics. Over 25 years spanning software development, architecture, Agile coaching, and senior leadership. At Ocado Technology, built and led an Engineering Practices function of ~25 people — including Application Security (~15), Engineering Practice Leads, and Agile Coaching — driving Engineering Productivity and Developer Experience across 2,500 technologists in 8 locations. Energised by sociotechnical challenges — coaching individuals, facilitating change, and designing organisations that reduce friction and improve outcomes.",
   "experience": [
     {

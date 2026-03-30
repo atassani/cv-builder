@@ -10,6 +10,15 @@
     "website": "humblyproud.com",
     "location": "Barcelona"
   },
+  "labels": {
+    "summary": "Resumen",
+    "certifications": "Certificaciones",
+    "training": "Formación / Cursos",
+    "languages": "Idiomas",
+    "skills": "Habilidades",
+    "experience": "Experiencia",
+    "education": "Educación"
+  },
   "summary": "Líder de ingeniería en la intersección entre la excelencia técnica y la dinámica humana. Más de 25 años abarcando desarrollo de software, arquitectura, coaching Agile y liderazgo sénior. En Ocado Technology, construí y lideré una función de Prácticas de Ingeniería de ~25 personas — incluyendo Seguridad de Aplicaciones (~15), Engineering Practice Leads y Agile Coaching — impulsando la Productividad de Ingeniería y la Experiencia del Desarrollador entre 2.500 tecnólogos en 8 ubicaciones. Me energizan los retos sociotécnicos: el coaching individual, la facilitación del cambio y el diseño de organizaciones que reducen la fricción y mejoran los resultados.",
   "experience": [
     {
