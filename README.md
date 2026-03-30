@@ -61,7 +61,11 @@ unzip raleway.zip -d fonts/Raleway/
 ## Usage
 
 ```bash
-python generate_cv.py cv_toni_tassani.json
+python generate_cv_pdf.py cv_toni_tassani.json
+```
+
+```bash
+python generate_cv_html.py cv_toni_tassani.json
 ```
 
 ## Icons
