@@ -55,7 +55,7 @@ FONTS_DIR  = os.path.join(SCRIPT_DIR, "fonts")
 #          B = round(255*a + 71*(1-a))
 # ─────────────────────────────────────────────────────────────────────────────
 NAVY  = HexColor("#1a2e47")   # main headings, rule
-BLUE  = HexColor("#3a7fc1")   # company / school names
+BLUE  = HexColor("#41a9fe")   # company / school names 
 MUTED = HexColor("#666666")   # dates, locations, contact text
 TEXT  = HexColor("#2c2c2c")   # bullet body text
 RULE  = HexColor("#dde3ec")   # main-column section rule
@@ -77,75 +77,65 @@ SIDE_RULE  = HexColor("#4c5c70")
 ICON_COLOR = MUTED
 
 # ─────────────────────────────────────────────────────────────────────────────
-# ICON PATHS  (SVG, unitsPerEm=512)
+# ICON PATHS — Font Awesome 6 Free Solid (MIT licence)
+# viewBox height is always 512; width varies per glyph (see ICON_WIDTHS).
 # ─────────────────────────────────────────────────────────────────────────────
 ICON_PATHS = {
+    # fa-phone  viewBox 0 0 512 512
     "phone": (
-        "M342 486Q281 486 242 443L207 412Q188 392 207 371Q228 352 247 371L282 406"
-        "Q306 429 342.5 429.0Q379 429 403 406Q429 378 429 342Q429 303 403 282L371 247"
-        "Q352 228 371 207Q380 198 391 198Q404 198 411 207L446 242Q486 282 486 342"
-        "Q486 404 443 443Q404 486 342 486Z"
-        "M265 141L230 106Q206 83 169.5 83.0Q133 83 109 106Q83 134 83 170"
-        "Q83 209 109 230L141 265Q160 284 141 305Q120 324 100 305L69 270"
-        "Q26 231 26 170Q26 108 69 69Q108 26 170 26Q231 26 270 69L305 103"
-        "Q324 124 305 144Q286 162 265 141Z"
-        "M296 337L175 216Q156 196 175 175Q185 167 196 167Q206 167 216 175L337 296"
-        "Q356 316 337 337Q316 356 296 337Z"
+        "M164.9 24.6c-7.7-18.6-28-28.5-47.4-23.2l-88 24C12.1 30.2 0 46 0 64"
+        "C0 311.4 200.6 512 448 512c18 0 33.8-12.1 38.6-29.5l24-88"
+        "c5.3-19.4-4.6-39.7-23.2-47.4l-96-40c-16.3-6.8-35.2-2.1-46.3 11.6"
+        "L304.7 368C234.3 334.7 177.3 277.7 144 207.3L193.3 167"
+        "c13.7-11.2 18.4-30 11.6-46.3l-40-96z"
     ),
+    # fa-at  viewBox 0 0 512 512
     "email": (
-        "M457 158Q457 150 454 138Q452 127 448 118Q442 102 413 88Q388 73 360 73"
-        "Q350 73 345 74Q335 76 329 78Q325 79 315 82L299 88Q295 90 290.5 91.5"
-        "Q286 93 285 93Q251 106 235 117Q198 140 160 178Q119 219 98 254"
-        "Q84 276 75 304Q74 305 69 318Q67 325 64 334Q64 335 62.0 339.5"
-        "Q60 344 59 347Q57 359 56 364Q55 368 55 379Q55 404 69 432"
-        "Q86 461 100 467Q105 470 119 473Q137 475 139 475H145Q151 472 161 453"
-        "Q162 452 163.5 449.0Q165 446 166.5 443.0Q168 440 169 437Q173 431 179 419"
-        "L188 404L189 403Q190 402 191.0 400.5Q192 399 193 397Q196 393 199 387"
-        "Q201 381 201 379Q201 374 193 364Q182 353 175 349Q163 339 158 333"
-        "Q149 326 149 320Q149 318 151 314L153 308Q154 308 155.0 305.0"
-        "Q156 302 157 301Q160 296 161 296Q182 257 210 229Q240 199 277 179"
-        "Q278 179 283 176Q289 172 290 172Q292 170 296 169Q298 168 302 168"
-        "Q308 168 315 176Q326 187 330 194Q340 206 346 211Q354 219 360.0 219.0"
-        "Q366 219 368 217Q373 215 379 211Q383 209 386 206Q388 205 390.5 203.5"
-        "Q393 202 396.0 200.0Q399 198 401 197Q404 195 410.0 192.0Q416 189 419 187"
-        "L435 179Q454 168 456 164Q457 162 457 158Z"
+        "M256 64C150 64 64 150 64 256s86 192 192 192c17.7 0 32 14.3 32 32"
+        "s-14.3 32-32 32C114.6 512 0 397.4 0 256S114.6 0 256 0S512 114.6 512 256"
+        "l0 32c0 53-43 96-96 96c-29.3 0-55.6-13.2-73.2-33.9"
+        "C320 371.1 289.5 384 256 384c-70.7 0-128-57.3-128-128s57.3-128 128-128"
+        "c27.9 0 53.7 8.9 74.7 24.1c5.7-5 13.1-8.1 21.3-8.1"
+        "c17.7 0 32 14.3 32 32l0 80 0 32c0 17.7 14.3 32 32 32s32-14.3 32-32"
+        "l0-32c0-106-86-192-192-192zm64 192a64 64 0 1 0 -128 0 64 64 0 1 0 128 0z"
     ),
+    # fa-link  viewBox 0 0 640 512
     "link": (
-        "M359 364V210Q359 198 363 188Q367 181 373 178Q378 174 387 174"
-        "Q403 174 416 184Q428 194 434 206Q441 218 444 234Q446 243 446 269"
-        "Q446 293 440 314Q434 338 421 356Q409 376 391 392Q376 407 353 420"
-        "Q330 432 307 438Q279 445 256 445Q234 445 206 438Q183 432 160 419"
-        "Q143 409 122 390Q102 370 92 351Q81 332 73 306Q66 282 66 255"
-        "Q66 233 73 205Q82 175 92 159Q105 137 122 121Q146 99 160 91"
-        "Q180 80 206 72Q225 66 256 66Q285 66 307 73Q334 81 354 93L375 56"
-        "Q346 39 318 31Q282 22 255 22Q226 22 194 30Q163 39 138 54"
-        "Q112 70 91 90Q69 112 55 137Q43 158 32 192Q24 219 24 254"
-        "Q24 288 32 315Q41 345 55 370Q72 396 91 418Q111 438 138 454"
-        "Q160 467 194 477Q226 485 255 485Q286 485 318 477Q350 467 373 454"
-        "Q401 439 420 420Q443 397 456 375Q472 349 479 323Q487 299 487 266"
-        "Q487 250 484.0 234.0Q481 218 475 203Q468 187 461 176Q451 162 441 154"
-        "Q429 144 415 138Q404 133 385 133Q362 133 349 142Q336 151 326 166"
-        "Q314 155 294 147Q280 141 254 141Q230 141 210 150Q190 157 174 173"
-        "Q160 187 151 207Q143 228 143 250Q143 271 152 292Q160 311 175.0 326.0"
-        "Q190 341 210 350Q232 358 254 358Q274 358 287 354Q305 348 316 340V359H359Z"
-        "M255 187Q278 187 293 198Q308 207 317 224V282Q312 292 306 298"
-        "Q298 306 292 310Q288 312 274 318Q262 320 254 320Q239 320 227 314"
-        "Q216 310 206 300Q195 291 191 278Q186 265 186 253Q186 240 191 227"
-        "Q195 216 205 206Q210 200 226 192Q241 187 255 187Z"
+        "M579.8 267.7c56.5-56.5 56.5-148 0-204.5c-50-50-128.8-56.5-186.3-15.4"
+        "l-1.6 1.1c-14.4 10.3-17.7 30.3-7.4 44.6s30.3 17.7 44.6 7.4l1.6-1.1"
+        "c32.1-22.9 76-19.3 103.8 8.6c31.5 31.5 31.5 82.5 0 114L422.3 334.8"
+        "c-31.5 31.5-82.5 31.5-114 0c-27.9-27.9-31.5-71.8-8.6-103.8l1.1-1.6"
+        "c10.3-14.4 6.9-34.4-7.4-44.6s-34.4-6.9-44.6 7.4l-1.1 1.6"
+        "C206.5 251.2 213 330 263 380c56.5 56.5 148 56.5 204.5 0L579.8 267.7z"
+        "M60.2 244.3c-56.5 56.5-56.5 148 0 204.5c50 50 128.8 56.5 186.3 15.4"
+        "l1.6-1.1c14.4-10.3 17.7-30.3 7.4-44.6s-30.3-17.7-44.6-7.4l-1.6 1.1"
+        "c-32.1 22.9-76 19.3-103.8-8.6C74 372 74 321 105.5 289.5L217.7 177.2"
+        "c31.5-31.5 82.5-31.5 114 0c27.9 27.9 31.5 71.8 8.6 103.9l-1.1 1.6"
+        "c-10.3 14.4-6.9 34.4 7.4 44.6s34.4 6.9 44.6-7.4l1.1-1.6"
+        "C433.5 260.8 427 182 377 132c-56.5-56.5-148-56.5-204.5 0L60.2 244.3z"
     ),
+    # fa-location-dot  viewBox 0 0 384 512
     "location": (
-        "M412 380Q400 410 376 434Q349 459 322 470Q289 484 256.0 484.0"
-        "Q223 484 190 470Q163 459 136 434Q112 410 100 380Q86 347 86.0 314.0"
-        "Q86 281 100 248Q105 233 117 216L229 45Q240 28 256.0 28.0"
-        "Q272 28 283 45L395 216Q407 233 412 248Q426 281 426.0 314.0"
-        "Q426 347 412 380Z"
-        "M301 269Q282 250 256.0 250.0Q230 250 211 269Q193 287 193 314"
-        "Q193 340 211 358Q230 377 256.0 377.0Q282 377 301 358"
-        "Q319 340 319 314Q319 287 301 269Z"
+        "M215.7 499.2C267 435 384 279.4 384 192C384 86 298 0 192 0S0 86 0 192"
+        "c0 87.4 117 243 168.3 307.2c12.3 15.3 35.1 15.3 47.4 0z"
+        "M192 128a64 64 0 1 1 0 128 64 64 0 1 1 0-128z"
     ),
 }
 
-ICON_UPM = 512
+# SVG viewBox width for each icon (height is always 512 for all FA icons)
+ICON_WIDTHS = {
+    "phone":    512,
+    "email":    512,
+    "link":     640,
+    "location": 384,
+}
+
+ICON_UPM = 512  # viewBox height (constant across all FA icons)
+
+
+def icon_rendered_width(name, size):
+    """Width in PDF points of the icon when rendered at the given height."""
+    return ICON_WIDTHS[name] / ICON_UPM * size
 
 
 def draw_icon(c, name, x, y, size, color=None):
@@ -162,29 +152,131 @@ def draw_icon(c, name, x, y, size, color=None):
     c.restoreState()
 
 
+def _arc_to_bezier(x1, y1, rx, ry, phi_deg, fa, fs, x2, y2):
+    """Convert an SVG arc segment to cubic bezier tuples. SVG spec algorithm."""
+    import math
+    if x1 == x2 and y1 == y2:
+        return []
+    rx, ry = abs(rx), abs(ry)
+    if rx == 0 or ry == 0:
+        return []
+    phi = math.radians(phi_deg)
+    cp, sp = math.cos(phi), math.sin(phi)
+    dx, dy = (x1 - x2) / 2, (y1 - y2) / 2
+    x1p =  cp * dx + sp * dy
+    y1p = -sp * dx + cp * dy
+    lam = (x1p / rx) ** 2 + (y1p / ry) ** 2
+    if lam > 1:
+        s = math.sqrt(lam); rx *= s; ry *= s
+    num = max(0.0, (rx * ry) ** 2 - (rx * y1p) ** 2 - (ry * x1p) ** 2)
+    den = (rx * y1p) ** 2 + (ry * x1p) ** 2
+    sq = (math.sqrt(num / den) if den > 0 else 0.0) * (-1 if fa == fs else 1)
+    cxp, cyp =  sq * rx * y1p / ry, -sq * ry * x1p / rx
+    cx = cp * cxp - sp * cyp + (x1 + x2) / 2
+    cy = sp * cxp + cp * cyp + (y1 + y2) / 2
+
+    def angle(ux, uy, vx, vy):
+        n = math.sqrt((ux * ux + uy * uy) * (vx * vx + vy * vy))
+        if n < 1e-10:
+            return 0.0
+        a = math.acos(max(-1.0, min(1.0, (ux * vx + uy * vy) / n)))
+        return -a if ux * vy - uy * vx < 0 else a
+
+    theta1 = angle(1, 0, (x1p - cxp) / rx, (y1p - cyp) / ry)
+    dtheta = angle((x1p - cxp) / rx, (y1p - cyp) / ry,
+                   (-x1p - cxp) / rx, (-y1p - cyp) / ry)
+    if not fs and dtheta > 0:
+        dtheta -= 2 * math.pi
+    elif fs and dtheta < 0:
+        dtheta += 2 * math.pi
+    n_segs = max(1, math.ceil(abs(dtheta) / (math.pi / 2)))
+    d_seg = dtheta / n_segs
+    beziers = []
+    px, py, t = x1, y1, theta1
+    for _ in range(n_segs):
+        alpha = math.sin(d_seg) * (math.sqrt(4 + 3 * math.tan(d_seg / 2) ** 2) - 1) / 3
+        ct, st = math.cos(t), math.sin(t)
+        dx1 = cp * (-rx * st) - sp * (ry * ct)
+        dy1 = sp * (-rx * st) + cp * (ry * ct)
+        t2 = t + d_seg
+        ct2, st2 = math.cos(t2), math.sin(t2)
+        ex = cp * rx * ct2 - sp * ry * st2 + cx
+        ey = sp * rx * ct2 + cp * ry * st2 + cy
+        dx2 = cp * (-rx * st2) - sp * (ry * ct2)
+        dy2 = sp * (-rx * st2) + cp * (ry * ct2)
+        beziers.append((px + alpha * dx1, py + alpha * dy1,
+                        ex - alpha * dx2, ey - alpha * dy2, ex, ey))
+        px, py, t = ex, ey, t2
+    return beziers
+
+
 def _parse_svg_path(path, d):
+    """Full SVG path parser: handles M m L l C c S s Q q Z z A a."""
     import re
-    tokens = re.findall(r'[MLQZ]|[-+]?\d*\.?\d+', d)
+    tokens = re.findall(
+        r'[MmLlCcSsQqZzAa]|[-+]?(?:\d+\.?\d*|\.\d+)(?:[eE][-+]?\d+)?', d
+    )
     i = 0
-    cx, cy = 0, 0
+    cx, cy        = 0.0, 0.0
+    mx, my        = 0.0, 0.0    # start of current subpath (for Z)
+    lcp_x, lcp_y  = None, None  # last cubic CP (for S/s)
+    cmd = 'M'
+
+    def rd(n):
+        nonlocal i
+        vals = [float(tokens[i + j]) for j in range(n)]
+        i += n
+        return vals
+
     while i < len(tokens):
-        cmd = tokens[i]; i += 1
+        t = tokens[i]
+        if t in 'MmLlCcSsQqZzAa':
+            cmd = t; i += 1
+
         if cmd == 'M':
-            cx, cy = float(tokens[i]), float(tokens[i+1]); i += 2
-            path.moveTo(cx, cy)
+            cx, cy = rd(2); path.moveTo(cx, cy)
+            mx, my = cx, cy; lcp_x = None; cmd = 'L'
+        elif cmd == 'm':
+            dx, dy = rd(2); cx += dx; cy += dy
+            path.moveTo(cx, cy); mx, my = cx, cy; lcp_x = None; cmd = 'l'
         elif cmd == 'L':
-            cx, cy = float(tokens[i]), float(tokens[i+1]); i += 2
-            path.lineTo(cx, cy)
-        elif cmd == 'Q':
-            x1, y1 = float(tokens[i]), float(tokens[i+1]); i += 2
-            x2, y2 = float(tokens[i]), float(tokens[i+1]); i += 2
-            cpx1 = cx + 2/3 * (x1 - cx); cpy1 = cy + 2/3 * (y1 - cy)
-            cpx2 = x2 + 2/3 * (x1 - x2); cpy2 = y2 + 2/3 * (y1 - y2)
-            path.curveTo(cpx1, cpy1, cpx2, cpy2, x2, y2)
-            cx, cy = x2, y2
-        elif cmd == 'Z':
-            path.close()
-            cx, cy = 0, 0
+            cx, cy = rd(2); path.lineTo(cx, cy); lcp_x = None
+        elif cmd == 'l':
+            dx, dy = rd(2); cx += dx; cy += dy
+            path.lineTo(cx, cy); lcp_x = None
+        elif cmd == 'C':
+            x1, y1, x2, y2, cx, cy = rd(6)
+            path.curveTo(x1, y1, x2, y2, cx, cy); lcp_x, lcp_y = x2, y2
+        elif cmd == 'c':
+            x1, y1, x2, y2, dx, dy = rd(6)
+            x1 += cx; y1 += cy; x2 += cx; y2 += cy; cx += dx; cy += dy
+            path.curveTo(x1, y1, x2, y2, cx, cy); lcp_x, lcp_y = x2, y2
+        elif cmd in ('S', 's'):
+            x2, y2, ex, ey = rd(4)
+            if cmd == 's':
+                x2 += cx; y2 += cy; ex += cx; ey += cy
+            x1 = 2 * cx - lcp_x if lcp_x is not None else cx
+            y1 = 2 * cy - lcp_y if lcp_y is not None else cy
+            path.curveTo(x1, y1, x2, y2, ex, ey)
+            lcp_x, lcp_y = x2, y2; cx, cy = ex, ey
+        elif cmd in ('Q', 'q'):
+            x1, y1, ex, ey = rd(4)
+            if cmd == 'q':
+                x1 += cx; y1 += cy; ex += cx; ey += cy
+            path.curveTo(cx + 2/3*(x1-cx), cy + 2/3*(y1-cy),
+                         ex + 2/3*(x1-ex), ey + 2/3*(y1-ey), ex, ey)
+            cx, cy = ex, ey; lcp_x = None
+        elif cmd in ('Z', 'z'):
+            path.close(); cx, cy = mx, my; lcp_x = None
+        elif cmd in ('A', 'a'):
+            rx, ry, phi, fa, fs, ex, ey = rd(7)
+            fa, fs = int(fa), int(fs)
+            if cmd == 'a':
+                ex += cx; ey += cy
+            for bz in _arc_to_bezier(cx, cy, rx, ry, phi, fa, fs, ex, ey):
+                path.curveTo(*bz)
+            cx, cy = ex, ey; lcp_x = None
+
 
 
 # ─────────────────────────────────────────────────────────────────────────────
@@ -349,17 +441,17 @@ class CV:
         self.c.line(MAIN_W + PAD_SL, self.sy, W - PAD_SR, self.sy)
         self.sy -= 4 * mm
 
-    def spara(self, text, size=8.5, color=None, gap=4):
+    def spara(self, text, fontSize=8.5, color=None, gapAfterPara=4):
         """Sidebar paragraph (e.g. summary)."""
         if color is None:
             color = SIDE_TEXT
-        self.c.setFont("OpenSans-Regular", size)
+        self.c.setFont("OpenSans-Regular", fontSize)
         self.c.setFillColor(color)
-        lh = size * 1.85   # generous line height for readability
-        for line in wrap_text(text, "OpenSans-Regular", size, SIDE_TW):
+        lh = fontSize * 1.5   # generous line height for readability
+        for line in wrap_text(text, "OpenSans-Regular", fontSize, SIDE_TW):
             self.c.drawString(MAIN_W + PAD_SL, self.sy, line)
             self.sy -= lh
-        self.sy -= gap
+        self.sy -= gapAfterPara
 
     def scert(self, name, issuer):
         """Sidebar certification / training entry."""
@@ -409,7 +501,7 @@ class CV:
         self.c.setFillColor(WHITE)
         self.c.drawString(sx, self.sy, label)
         self.sy -= 9 * 1.3
-        self.spara(tags, size=8, color=SIDE_TAGS, gap=3 * mm)
+        self.spara(tags, fontSize=8, color=SIDE_TAGS, gapAfterPara=3 * mm)
 
     # ── Main column helpers ──────────────────────────────────────────
 
@@ -424,11 +516,11 @@ class CV:
         self.c.setFont("Raleway-Bold", 11.5)
         self.c.setFillColor(NAVY)
         self.c.drawString(PAD_ML, self.my, title.upper())
-        self.my -= 2 * mm
+        self.my -= 3 * mm
         self.c.setStrokeColor(RULE)
         self.c.setLineWidth(0.8)
         self.c.line(PAD_ML, self.my, MAIN_W - PAD_MR, self.my)
-        self.my -= 3.5 * mm
+        self.my -= 5 * mm
 
     def mjob(self, role, dates, company, location, desc=None, bullets=None):
         est = max(1, len(role) // 42) * 10 * 1.3 + 9 * 1.4
@@ -436,10 +528,20 @@ class CV:
             est += max(1, len(desc) // 68) * 8 * 1.5
         if bullets:
             est += sum(max(1, len(b) // 72) * 8.5 * 1.6 for b in bullets)
-        self.check_main(min(est, 45 * mm))
+        self.check_main(min(est, 35 * mm))
+
+        # Company + location
+        self.c.setFont("OpenSans-SemiBold", 9)
+        self.c.setFillColor(BLUE)
+        self.c.drawString(PAD_ML, self.my, company)
+        lw = SW(dates, "OpenSans-Regular", 8)
+        self.c.setFont("OpenSans-Regular", 8)
+        self.c.setFillColor(MUTED)
+        self.c.drawString(PAD_ML + MAIN_TW - lw, self.my, dates)
+        self.my -= 9 * 1.4
 
         # Role title + dates on the right
-        dw     = SW(dates, "OpenSans-Regular", 8)
+        dw     = SW(location, "OpenSans-Regular", 8)
         rlines = wrap_text(role, "Raleway-SemiBold", 10, MAIN_TW - dw - 3)
         lh_r   = 10 * 1.3
         self.c.setFont("Raleway-SemiBold", 10)
@@ -448,31 +550,21 @@ class CV:
             self.c.drawString(PAD_ML, self.my - i * lh_r, line)
         self.c.setFont("OpenSans-Regular", 8)
         self.c.setFillColor(MUTED)
-        self.c.drawString(PAD_ML + MAIN_TW - dw, self.my, dates)
+        self.c.drawString(PAD_ML + MAIN_TW - dw, self.my, location)
         self.my -= len(rlines) * lh_r
-
-        # Company + location
-        self.c.setFont("OpenSans-SemiBold", 9)
-        self.c.setFillColor(BLUE)
-        self.c.drawString(PAD_ML, self.my, company)
-        lw = SW(location, "OpenSans-Regular", 8)
-        self.c.setFont("OpenSans-Regular", 8)
-        self.c.setFillColor(MUTED)
-        self.c.drawString(PAD_ML + MAIN_TW - lw, self.my, location)
-        self.my -= 9 * 1.4
 
         if desc:
             self.c.setFont("OpenSans-Regular", 8)
             self.c.setFillColor(MUTED)
             for line in wrap_text(desc, "OpenSans-Regular", 8, MAIN_TW):
                 self.c.drawString(PAD_ML, self.my, line)
-                self.my -= 8 * 1.5
+                self.my -= 8 * 1.3
             self.my -= 1 * mm
 
         if bullets:
             indent = 3.5 * mm
             btw    = MAIN_TW - indent - 1.5 * mm
-            lh     = 8.5 * 1.6
+            lh     = 8.5 * 1.3
             for b in bullets:
                 blines = wrap_text(b, "OpenSans-Regular", 8.5, btw)
                 if self.my - len(blines) * lh < PAD_BOT + 10 * mm:
@@ -542,7 +634,7 @@ def main():
     cv.sy -= photo_d + 8 * mm   # 8 mm below photo before "Summary"
 
     cv.ssec("Summary")
-    cv.spara(data["summary"], size=8.5, gap=3)
+    cv.spara(data["summary"], fontSize=8.5, gapAfterPara=15)
 
     cv.ssec("Certifications")
     for cert in data["certifications"]:
@@ -569,16 +661,16 @@ def main():
     # ── MAIN COLUMN ──────────────────────────────────────────────────
 
     # Name (28 pt matches HTML template)
-    c.setFont("Raleway-ExtraBold", 28)
+    c.setFont("Raleway-ExtraBold", 20)
     c.setFillColor(NAVY)
     c.drawString(PAD_ML, cv.my, data["name"])
-    cv.my -= 28 * 1.1
+    cv.my -= 20 * 1.1
 
     # Title (16 pt matches HTML template)
-    c.setFont("Raleway-Regular", 16)
+    c.setFont("Raleway-Regular", 15)
     c.setFillColor(BLUE)
     c.drawString(PAD_ML, cv.my, data["title"])
-    cv.my -= 16 * 1.4
+    cv.my -= 15 * 1.4
 
     # Contact rows with icons
     icon_size = 9
@@ -598,7 +690,7 @@ def main():
         cx = PAD_ML
         for icon_name, label in row:
             draw_icon(c, icon_name, cx, cv.my, icon_size)
-            cx += icon_size + 1.5 * mm
+            cx += icon_rendered_width(icon_name, icon_size) + 1.5 * mm
             c.setFont("OpenSans-Regular", text_size)
             c.setFillColor(MUTED)
             c.drawString(cx, cv.my, label)

@@ -15,8 +15,34 @@ import base64
 import html
 import json
 import os
+import xml.etree.ElementTree as ET
 
 SCRIPT_DIR = os.path.dirname(os.path.abspath(__file__))
+ICONS_DIR  = os.path.join(SCRIPT_DIR, "icons")
+_SVG_NS    = "http://www.w3.org/2000/svg"
+ICON_COLOR = "#666666"  # muted — matches --muted CSS variable
+
+
+def inline_svg_icon(name, color=ICON_COLOR, size="1em"):
+    """Return an inline <svg> string for the named icon from the icons/ directory.
+
+    Icons are Font Awesome 6 Free Solid SVGs (CC BY 4.0).
+    To update an icon, replace the corresponding .svg file in icons/.
+    """
+    svg_path = os.path.join(ICONS_DIR, f"{name}.svg")
+    tree = ET.parse(svg_path)
+    root = tree.getroot()
+    vb = root.get("viewBox", "0 0 512 512")
+    paths_html = "".join(
+        f'<path d="{el.get("d")}" fill="{color}"/>'
+        for el in root.iter()
+        if el.tag in (f"{{{_SVG_NS}}}path", "path") and el.get("d")
+    )
+    return (
+        f'<svg xmlns="http://www.w3.org/2000/svg" viewBox="{vb}" '
+        f'style="height:{size};width:auto;vertical-align:middle;margin-right:3px;" '
+        f'aria-hidden="true">{paths_html}</svg>'
+    )
 
 
 def parse_args():
@@ -72,12 +98,12 @@ def build_experience(jobs):
         lines = [
             '    <div class="job">',
             '      <div class="job-hd">',
-            f'        <span class="job-role">{esc(job["role"])}</span>',
-            f'        <span class="job-dates">{esc(job["dates"])}</span>',
+            f'        <span class="job-company">{esc(job["company"])}</span>',
+            f'        <span class="job-location">{esc(job["location"])}</span>',
             '      </div>',
-            f'      <div class="job-co">'
-            f'<span class="job-co-name">{esc(job["company"])}</span>'
-            f'<span class="job-co-loc">{esc(job["location"])}</span>'
+            f'      <div class="job-role">'
+            f'<span class="job-role-name">{esc(job["role"])}</span>'
+            f'<span class="job-role-dates">{esc(job["dates"])}</span>'
             f'</div>',
         ]
         if job.get("desc"):
@@ -180,7 +206,7 @@ body {
 
 /* ── Page ── */
 .page {
-  width: 210mm;
+  width: 260mm;
   background: linear-gradient(to right,
     #ffffff 0%,
     #ffffff 63%,
@@ -239,11 +265,6 @@ body {
   line-height: 1.9;
   margin-top: 4px;
 }
-.contacts .icon {
-  color: var(--muted);
-  margin-right: 3px;
-  font-size: 11pt;
-}
 .contacts a {
   color: var(--muted);
   text-decoration: none;
@@ -293,15 +314,13 @@ body {
 /* ── Jobs ── */
 .job { margin-bottom: 12px; }
 .job-hd { display: table; width: 100%; }
-.job-role {
+.job-company {
   display: table-cell;
-  font-family: 'Rubik', sans-serif;
-  font-weight: 500;
-  font-size: 12pt;
-  color: var(--navy);
-  line-height: 1.3;
+  color: var(--blue);
+  font-weight: 600;
+  font-size: 14pt;
 }
-.job-dates {
+.job-location {
   display: table-cell;
   font-size: 10pt;
   color: var(--muted);
@@ -311,14 +330,16 @@ body {
   padding-top: 2px;
   padding-left: 4px;
 }
-.job-co { display: table; width: 100%; margin-bottom: 3px; margin-top: 1px; }
-.job-co-name {
+.job-role { display: table; width: 100%; margin-bottom: 3px; margin-top: 1px; }
+.job-role-name {
   display: table-cell;
-  color: var(--blue);
-  font-weight: 600;
-  font-size: 11pt;
+  font-family: 'Rubik', sans-serif;
+  font-weight: 500;
+  font-size: 12pt;
+  color: var(--navy);
+  line-height: 1.3;
 }
-.job-co-loc {
+.job-role-dates {
   display: table-cell;
   color: var(--muted);
   font-size: 10pt;
@@ -471,14 +492,14 @@ def build_document(data):
       <h1>{esc(data["name"])}</h1>
       <div class="cv-title">{esc(data["title"])}</div>
       <div class="contacts">
-        <span class="icon">&#9990;</span>{esc(contact["phone"])}
+        {inline_svg_icon("phone")}{esc(contact["phone"])}
         <span class="sep">|</span>
-        <span class="icon">&#64;</span>{esc(contact["email"])}
+        {inline_svg_icon("email")}{esc(contact["email"])}
         <span class="sep">|</span>
-        <a href="https://{esc(contact['linkedin'])}">{esc(contact["linkedin"])}</a><br>
-        <a href="https://{esc(contact['website'])}">{esc(contact["website"])}</a>
+        {inline_svg_icon("link")}<a href="https://{esc(contact['linkedin'])}">{esc(contact["linkedin"])}</a><br>
+        {inline_svg_icon("link")}<a href="https://{esc(contact['website'])}">{esc(contact["website"])}</a>
         <span class="sep">|</span>
-        {esc(contact["location"])}
+        {inline_svg_icon("location")}{esc(contact["location"])}
       </div>
     </div>
 

@@ -1,0 +1,13 @@
+<!-- Font Awesome 6 Free Solid — fa-location-dot -->
+<!-- Source: https://fontawesome.com/icons/location-dot?s=solid&f=classic -->
+<!-- License: Font Awesome Free License (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT) -->
+<!--          https://fontawesome.com/license/free -->
+<!--                                                                              -->
+<!-- To update this icon:                                                         -->
+<!--   1. Go to https://fontawesome.com/icons/location-dot?s=solid&f=classic     -->
+<!--   2. Click "Download" → "SVG"                                                -->
+<!--   3. Replace the <path> element(s) below with those from the downloaded file.-->
+<!--   4. Update the viewBox attribute on the <svg> element if it changed.        -->
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 384 512">
+  <path d="M215.7 499.2C267 435 384 279.4 384 192C384 86 298 0 192 0S0 86 0 192c0 87.4 117 243 168.3 307.2c12.3 15.3 35.1 15.3 47.4 0zM192 128a64 64 0 1 1 0 128 64 64 0 1 1 0-128z"/>
+</svg>

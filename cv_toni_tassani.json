@@ -14,7 +14,7 @@
   "experience": [
     {
       "role": "Deputy CTO / VP of Engineering Practices and Application Security",
-      "dates": "05/2019 – 01/2022",
+      "dates": "05/2019 – Present",
       "company": "Ocado Technology",
       "location": "Barcelona",
       "desc": "Ocado Technology provides the Ocado Smart Platform (OSP)—an end-to-end automation and e-commerce solution—to 13 international retail partners. ~2,500 technologists across 8 locations; 3,000+ patents in AI-driven logistics.",
@@ -22,7 +22,7 @@
         "Reporting to the CTO; part of the Engineering Productivity stream",
         "Identifying best engineering practices and extending them across the organisation",
         "Responsible for Application Security, Lean and Agile, and the SDLC",
-        "Leading adoption of Gen AI for Software Engineering (trials, metrics, alignment, enablement)",
+        "Leading adoption of **Gen AI for Software Engineering** (trials, metrics, alignment, enablement)",
         "Leading the Application Security function (~20 people), 4 Engineering Practice Leads, an Accessibility expert and an Agile Coach",
         "Measuring proxies to Engineering Productivity and Developer Experience, qualitatively and quantitatively",
         "Working with Cloud teams and SRE to find finance optimisations in cloud consumption",
@@ -32,8 +32,8 @@
     {
       "role": "Catalyst",
       "dates": "01/2018 – 05/2019",
-      "company": "Ocado Technology",
-      "location": "Barcelona",
+      "company": "",
+      "location": "",
       "bullets": [
         "Member of the Catalysts team focusing on Culture, Effectiveness and Efficiency using Agile and Lean tools",
         "From March to May 2019, assignment as Software Development Manager of Platform Services"
@@ -60,7 +60,10 @@
       "role": "Lecturer (part-time)",
       "dates": "10/2014 – Present",
       "company": "La Salle",
-      "location": "Barcelona"
+      "location": "Barcelona",
+      "bullets": [
+        "Teaching Agile Methodologies to master's students, mainly in Project Management, not limited to software development."
+      ]
     },
     {
       "role": "Consultant",
@@ -129,7 +132,7 @@
   "education": [
     {
       "degree": "Computers Engineer (Ingeniero en Informática)",
-      "school": "Facultat d'Informàtica de Barcelona – Universitat Politècnica de Catalunya",
+      "school": "FIB – Universitat Politècnica de Catalunya",
       "location": "Barcelona",
       "year": "09/1997"
     },
