@@ -31,7 +31,7 @@
         "Reporte directo al CTO; parte del área de Productividad de Ingeniería",
         "Identificar las mejores prácticas de ingeniería y extenderlas por toda la organización",
         "Responsable de Seguridad de Aplicaciones, Lean y Agile, y el SDLC",
-        "Liderando la adopción de **IA Generativa para Ingeniería de Software** (pruebas, métricas, alineación, habilitación)",
+        "Liderando la adopción de IA Generativa para Ingeniería de Software (pruebas, métricas, alineación, habilitación)",
         "Liderando la función de Seguridad de Aplicaciones (~20 personas), 4 Engineering Practice Leads, un experto en Accesibilidad y un Agile Coach",
         "Midiendo indicadores de Productividad de Ingeniería y Experiencia del Desarrollador, cualitativa y cuantitativamente",
         "Trabajando con equipos de Cloud y SRE para identificar optimizaciones financieras en el consumo cloud",
@@ -82,14 +82,11 @@
       "desc": "Agencia de viajes online con 1.700 empleados, más de 400 en IT, con sede en Barcelona.",
       "bullets": [
         "Lideré la transformación Agile con un grupo de 10 coaches; usando Kanban con el apoyo de David J. Anderson",
-        "Implantación en más de 50 equipos de desarrollo; coaching a 14 equipos (máximo 4 simultáneos)",
+        "Implantación en más de 50 equipos de desarrollo; coaching a 14 equipos",
         "Aplicación de Kanban en equipos no IT: Aprendizaje y Desarrollo y Help Desk",
         "Impartí formación en Kanban, Estilos Sociales, feedback efectivo, comunicación visual y otros temas",
         "Apoyé la mejora continua del grupo de DevOps; gestioné conflictos entre equipos; coaching individual",
-        "Rediseño organizativo con Managers de Desarrollo; kick-start con 80 participantes (apoyo de McKinsey)",
-        "Desarrollé una herramienta de visualización de madurez Kanban usando JavaScript / D3.js",
-        "Realicé sesiones de Impact Mapping con POs; identifiqué flujos de valor; presenté el plan ágil a la dirección"
-      ]
+        "Desarrollé una herramienta de visualización de madurez Kanban usando JavaScript / D3.js"      ]
     },
     {
       "role": "Profesor (a tiempo parcial)",
@@ -97,7 +94,7 @@
       "company": "La Salle",
       "location": "Barcelona",
       "bullets": [
-        "Docencia de Metodologías Ágiles a estudiantes internacionales de posgrado en el Máster en Gestión de Proyectos, abarcando contextos de software y no software"
+        "Docencia de Metodologías Ágiles a estudiantes internacionales el Máster en Gestión de Proyectos, abarcando contextos de software y no software"
       ]
     },
     {
@@ -120,7 +117,7 @@
       "bullets": [
         "Desarrollé y desplegué Cortellis; progresé de Analista Programador Sénior a Arquitecto de Soluciones",
         "Construí APIs de datos, Servicios Web y Aplicaciones en Java y Scala",
-        "Colaboré con el departamento de DevOps emergente; facilité reuniones; formé equipos distribuidos",
+        "Colaboré con el departamento de DevOps emergente; formé equipos distribuidos",
         "Transicioné las metodologías hacia DSDM Atern y Scrum"
       ]
     },
@@ -130,9 +127,9 @@
       "company": "Omatech",
       "location": "Barcelona",
       "bullets": [
-        "Consultor para Thomson Reuters Barcelona tras la adquisición de Prous Science",
+        "Consultor para Thomson Reuters tras la adquisición de Prous Science",
         "Formé al equipo de desarrollo en prácticas modernas y Java; ayudé en la transición ágil",
-        "Colaboré en el desarrollo de una aplicación web para científicos del sector farmacéutico"
+        "Desarrollé de una aplicación web para científicos del sector farmacéutico"
       ]
     },
     {
@@ -141,7 +138,7 @@
       "company": "Stacks Consulting",
       "location": "Barcelona",
       "bullets": [
-        "Development Manager y Arquitecto; equipo de 15 personas entre Barcelona y Madrid",
+        "Arquitecto y gestor de un equipo de 15 personas entre Barcelona y Madrid",
         "Puse en marcha el nuevo departamento de desarrollo Java; construí una aplicación web de gestión de Atención Primaria para Madrid"
       ]
     },
@@ -160,7 +157,7 @@
       "company": "Oracle Consulting",
       "location": "Barcelona",
       "bullets": [
-        "Desarrollé y lideré la entrega de proyectos en múltiples clientes en España, usando Oracle, Java y tecnologías Web. Gestioné equipos de hasta 5 personas."
+        "Desarrollé y lideré proyectos en múltiples clientes en España, usando Oracle, Java y tecnologías Web. Gestioné equipos de hasta 5 personas."
       ]
     }
   ],
