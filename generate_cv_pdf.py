@@ -489,11 +489,11 @@ class CV:
         self.c.setFont("Raleway-SemiBold", 10)
         self.c.setFillColor(WHITE)
         self.c.drawString(MAIN_W + PAD_SL, self.sy, title.upper())
-        self.sy -= 1.5 * mm
-        self.c.setStrokeColor(SIDE_RULE)
+        self.sy -= 3 * mm
+        self.c.setStrokeColor(WHITE)
         self.c.setLineWidth(0.5)
         self.c.line(MAIN_W + PAD_SL, self.sy, W - PAD_SR, self.sy)
-        self.sy -= 4 * mm
+        self.sy -= 5 * mm
 
     def spara(self, text, fontSize=8.5, color=None, gapAfterPara=4):
         """Sidebar paragraph (e.g. summary)."""
@@ -516,7 +516,7 @@ class CV:
             self.c.drawString(sx, self.sy, line)
             self.sy -= 9 * 1.35
         self.c.setFont("OpenSans-Regular", 8.5)
-        self.c.setFillColor(SIDE_MUTED)
+        self.c.setFillColor(SIDE_TEXT)
         self.c.drawString(sx, self.sy, issuer)
         self.sy -= 8.5 * 2   # match spara line-height for consistent rhythm
 
@@ -533,7 +533,7 @@ class CV:
         self.c.drawString(sx, self.sy, name)
 
         self.c.setFont("OpenSans-Regular", 8)
-        self.c.setFillColor(SIDE_MUTED)
+        self.c.setFillColor(SIDE_TEXT)
         self.c.drawString(sx + 32 * mm, self.sy, level)
 
         # Dots: 5 circles right-aligned inside the sidebar
@@ -555,7 +555,7 @@ class CV:
         self.c.setFillColor(WHITE)
         self.c.drawString(sx, self.sy, label)
         self.sy -= 9 * 1.3
-        self.spara(tags, fontSize=8, color=SIDE_TAGS, gapAfterPara=3 * mm)
+        self.spara(tags, fontSize=8, color=SIDE_TEXT, gapAfterPara=3 * mm)
 
     # ── Main column helpers ──────────────────────────────────────────
 
@@ -576,36 +576,49 @@ class CV:
         self.c.line(PAD_ML, self.my, MAIN_W - PAD_MR, self.my)
         self.my -= 5 * mm
 
-    def mjob(self, role, dates, company, location, desc=None, bullets=None):
-        est = max(1, len(role) // 42) * 10 * 1.3 + 9 * 1.4
+    def mjob(self, role, dates, company="", location="", desc=None, bullets=None):
+        est = max(1, len(role) // 42) * 10 * 1.3 + (9 * 1.4 if company else 0)
         if desc:
             est += max(1, len(desc) // 68) * 8 * 1.5
         if bullets:
             est += sum(max(1, len(b) // 72) * 8.5 * 1.6 for b in bullets)
         self.check_main(min(est, 35 * mm))
 
-        # Company + location
-        self.c.setFont("OpenSans-SemiBold", 9)
-        self.c.setFillColor(BLUE)
-        self.c.drawString(PAD_ML, self.my, company)
-        lw = SW(dates, "OpenSans-Regular", 8)
-        self.c.setFont("OpenSans-Regular", 8)
-        self.c.setFillColor(MUTED)
-        self.c.drawString(PAD_ML + MAIN_TW - lw, self.my, dates)
-        self.my -= 9 * 1.4
+        if company:
+            # Two-line header: company + dates / role + location
+            self.c.setFont("OpenSans-SemiBold", 9)
+            self.c.setFillColor(BLUE)
+            self.c.drawString(PAD_ML, self.my, company)
+            lw = SW(dates, "OpenSans-Regular", 8)
+            self.c.setFont("OpenSans-Regular", 8)
+            self.c.setFillColor(MUTED)
+            self.c.drawString(PAD_ML + MAIN_TW - lw, self.my, dates)
+            self.my -= 9 * 1.4
 
-        # Role title + dates on the right
-        dw     = SW(location, "OpenSans-Regular", 8)
-        rlines = wrap_text(role, "Raleway-SemiBold", 10, MAIN_TW - dw - 3)
-        lh_r   = 10 * 1.3
-        self.c.setFont("Raleway-SemiBold", 10)
-        self.c.setFillColor(NAVY)
-        for i, line in enumerate(rlines):
-            self.c.drawString(PAD_ML, self.my - i * lh_r, line)
-        self.c.setFont("OpenSans-Regular", 8)
-        self.c.setFillColor(MUTED)
-        self.c.drawString(PAD_ML + MAIN_TW - dw, self.my, location)
-        self.my -= len(rlines) * lh_r
+            dw     = SW(location, "OpenSans-Regular", 8)
+            rlines = wrap_text(role, "Raleway-SemiBold", 10, MAIN_TW - dw - 3)
+            lh_r   = 10 * 1.3
+            self.c.setFont("Raleway-SemiBold", 10)
+            self.c.setFillColor(NAVY)
+            for i, line in enumerate(rlines):
+                self.c.drawString(PAD_ML, self.my - i * lh_r, line)
+            self.c.setFont("OpenSans-Regular", 8)
+            self.c.setFillColor(MUTED)
+            self.c.drawString(PAD_ML + MAIN_TW - dw, self.my, location)
+            self.my -= len(rlines) * lh_r
+        else:
+            # Single-line header: role (left) + dates (right)
+            dw     = SW(dates, "OpenSans-Regular", 8)
+            rlines = wrap_text(role, "Raleway-SemiBold", 10, MAIN_TW - dw - 3)
+            lh_r   = 10 * 1.3
+            self.c.setFont("Raleway-SemiBold", 10)
+            self.c.setFillColor(NAVY)
+            for i, line in enumerate(rlines):
+                self.c.drawString(PAD_ML, self.my - i * lh_r, line)
+            self.c.setFont("OpenSans-Regular", 8)
+            self.c.setFillColor(MUTED)
+            self.c.drawString(PAD_ML + MAIN_TW - dw, self.my, dates)
+            self.my -= len(rlines) * lh_r
 
         if desc:
             self.c.setFont("OpenSans-Regular", 8)
@@ -646,13 +659,13 @@ class CV:
         self.c.setFont("OpenSans-SemiBold", 8.5)
         self.c.setFillColor(BLUE)
         self.c.drawString(PAD_ML, self.my, school)
-        lw = SW(location, "OpenSans-Regular", 8)
+        yw = SW(year, "OpenSans-Regular", 8)
         self.c.setFont("OpenSans-Regular", 8)
         self.c.setFillColor(MUTED)
-        self.c.drawString(PAD_ML + MAIN_TW - lw, self.my, location)
-        self.my -= 8.5 * 1.35
-        yw = SW(year, "OpenSans-Regular", 8)
         self.c.drawString(PAD_ML + MAIN_TW - yw, self.my, year)
+        self.my -= 8.5 * 1.35
+        lw = SW(location, "OpenSans-Regular", 8)
+        self.c.drawString(PAD_ML + MAIN_TW - lw, self.my, location)
         self.my -= 8 * 1.4 + 2.5 * mm
 
 
@@ -698,10 +711,14 @@ def main():
     cv.ssec("Certifications")
     for cert in data["certifications"]:
         cv.scert(cert["name"], cert["issuer"])
+    cv.spara("", fontSize=6.5, gapAfterPara=0)
+
 
     cv.ssec("Training / Courses")
     for training in data["training"]:
         cv.scert(training["name"], training["issuer"])
+    cv.spara("", fontSize=6.5, gapAfterPara=0)
+
 
     cv.ssec("Languages")
     for language in data["languages"]:
@@ -722,7 +739,7 @@ def main():
     # Name (28 pt matches HTML template)
     c.setFont("Raleway-ExtraBold", 20)
     c.setFillColor(NAVY)
-    c.drawString(PAD_ML, cv.my, data["name"])
+    c.drawString(PAD_ML, cv.my, data["name"].upper())
     cv.my -= 20 * 1.1
 
     # Title (16 pt matches HTML template)
@@ -757,17 +774,18 @@ def main():
         cv.my -= row_h
 
     # Name-block bottom border (matches HTML: padding-bottom 5mm, margin-bottom 7mm)
-    cv.my -= 5 * mm
-    c.setStrokeColor(NAVY)
-    c.setLineWidth(1.5)
-    c.line(PAD_ML, cv.my, MAIN_W - PAD_MR, cv.my)
-    cv.my -= 7 * mm
+    # cv.my -= 5 * mm
+    # c.setStrokeColor(NAVY)
+    # c.setLineWidth(1.5)
+    # c.line(PAD_ML, cv.my, MAIN_W - PAD_MR, cv.my)
+    cv.my -= 8.5 * mm
 
     # Experience
     cv.msec("Experience")
     for job in data["experience"]:
         cv.mjob(
-            job["role"], job["dates"], job["company"], job["location"],
+            job["role"], job["dates"],
+            company=job.get("company", ""), location=job.get("location", ""),
             desc=job.get("desc"), bullets=job.get("bullets"),
         )
 

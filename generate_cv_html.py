@@ -108,17 +108,28 @@ def dots_html(filled, total=5):
 def build_experience(jobs):
     parts = []
     for job in jobs:
-        lines = [
-            '    <div class="job">',
-            '      <div class="job-hd">',
-            f'        <span class="job-company">{esc(job["company"])}</span>',
-            f'        <span class="job-location">{esc(job["location"])}</span>',
-            '      </div>',
-            f'      <div class="job-role">'
-            f'<span class="job-role-name">{esc(job["role"])}</span>'
-            f'<span class="job-role-dates">{esc(job["dates"])}</span>'
-            f'</div>',
-        ]
+        company  = job.get("company", "")
+        location = job.get("location", "")
+        if company:
+            lines = [
+                '    <div class="job">',
+                '      <div class="job-hd">',
+                f'        <span class="job-company">{esc(company)}</span>',
+                f'        <span class="job-location">{esc(location)}</span>',
+                '      </div>',
+                f'      <div class="job-role">'
+                f'<span class="job-role-name">{esc(job["role"])}</span>'
+                f'<span class="job-role-dates">{esc(job["dates"])}</span>'
+                f'</div>',
+            ]
+        else:
+            lines = [
+                '    <div class="job">',
+                f'      <div class="job-role">'
+                f'<span class="job-role-name">{esc(job["role"])}</span>'
+                f'<span class="job-role-dates">{esc(job["dates"])}</span>'
+                f'</div>',
+            ]
         if job.get("desc"):
             lines.append(f'      <p class="job-desc">{esc(job["desc"])}</p>')
         if job.get("bullets"):
@@ -263,6 +274,7 @@ body {
   color: var(--navy);
   letter-spacing: .01em;
   line-height: 1;
+  text-transform: uppercase;
 }
 .name-block .cv-title {
   font-family: 'Rubik', sans-serif;

@@ -1,20 +1,20 @@
 {
-  "name": "TONI TASSANI",
+  "name": "Toni Tassani",
   "title": "VP of Engineering",
   "photo_path": "profile_tonitassani.jpeg",
   "output_pdf": "cv_toni_tassani.pdf",
   "contact": {
     "phone": "+34688418191",
     "email": "toni.tassani@gmail.com",
-    "linkedin": "linkedin/in/tonitassani",
+    "linkedin": "linkedin.com/in/tonitassani",
     "website": "humblyproud.com",
     "location": "Barcelona"
   },
-  "summary": "Technology leader who bridges engineering excellence and human dynamics. Combines experience in software architecture and delivery with coaching, facilitation, and organisational design. Brings clarity to complex problems, strengthens team effectiveness, and builds environments where engineers can perform at their best while maintaining strong focus on outcomes, risk, and business impact.",
+  "summary": "Engineering leader at the intersection of technical excellence and human dynamics. Over 25 years spanning software development, architecture, Agile coaching, and senior leadership. At Ocado Technology, built and led an Engineering Practices function of ~25 people — including Application Security (~15), Engineering Practice Leads, and Agile Coaching — driving Engineering Productivity and Developer Experience across 2,500 technologists in 8 locations. Energised by sociotechnical challenges — coaching individuals, facilitating change, and designing organisations that reduce friction and improve outcomes.",
   "experience": [
     {
-      "role": "Deputy CTO / VP of Engineering Practices and Application Security",
-      "dates": "05/2019 – Present",
+      "role": "VP of Engineering Practices and Application Security",
+      "dates": "2025 – Present",
       "company": "Ocado Technology",
       "location": "Barcelona",
       "desc": "Ocado Technology provides the Ocado Smart Platform (OSP)—an end-to-end automation and e-commerce solution—to 13 international retail partners. ~2,500 technologists across 8 locations; 3,000+ patents in AI-driven logistics.",
@@ -30,23 +30,49 @@
       ]
     },
     {
-      "role": "Catalyst",
-      "dates": "01/2018 – 05/2019",
+      "role": "Deputy CTO",
+      "dates": "2022 – 2025",
       "company": "",
       "location": "",
       "bullets": [
-        "Member of the Catalysts team focusing on Culture, Effectiveness and Efficiency using Agile and Lean tools",
-        "From March to May 2019, assignment as Software Development Manager of Platform Services"
+        "Continued leading Engineering Practices and Application Security with expanded organisational remit"
+      ]
+    },
+    {
+      "role": "Deputy Chief Engineering Officer - Engineering",
+      "dates": "2019 – 2022",
+      "company": "",
+      "location": "",
+      "bullets": [
+        "Built the Engineering Practices function from the ground up, partnering with the Deputy CEngO for Technology to promote software architecture and delivery excellence across the organisation"
+      ]
+    },
+    {
+      "role": "Engineering Manager (Assignment)",
+      "dates": "2019 – 2019",
+      "company": "",
+      "location": "",
+      "bullets": [
+        "Short-term assignment to establish an SRE function within Platform Services in Barcelona, before transitioning to the Engineering Practices stream"
+      ]
+    },    
+    {
+      "role": "Catalyst (Lean and Agile Coach)",
+      "dates": "2018 – 2019",
+      "company": "",
+      "location": "",
+      "bullets": [
+        "Member of the Catalysts team, around 10 people, focusing on Culture, Effectiveness and Efficiency using Agile and Lean tools"
       ]
     },
     {
       "role": "Agile Coach",
-      "dates": "2015 – 01/2018",
+      "dates": "2015 – 2018",
       "company": "eDreams ODIGEO",
       "location": "Barcelona",
       "desc": "Online Travel Agency with 1,700 employees, 400+ in IT, headquartered in Barcelona.",
       "bullets": [
-        "Led Agile transformation with a group of 10 coaches; Kanban with support from David J. Anderson",
+        "Led Agile transformation with a group of 10 coaches; using Kanban with support from David J. Anderson",
         "Rolled out to 50+ development teams; coached 14 teams (max 4 at a time)",
         "Applied Kanban in non-IT teams: Learning & Development and Help Desk",
         "Taught Kanban, Social Styles, effective feedback, visual communication, and other topics",
@@ -58,30 +84,30 @@
     },
     {
       "role": "Lecturer (part-time)",
-      "dates": "10/2014 – Present",
+      "dates": "2014 – Present",
       "company": "La Salle",
       "location": "Barcelona",
       "bullets": [
-        "Teaching Agile Methodologies to master's students, mainly in Project Management, not limited to software development."
+        "Teaching Agile Methodologies to international postgraduate students in the Master in Project Management, covering both software and non-software contexts"
       ]
     },
     {
       "role": "Consultant",
-      "dates": "01/2015 – 10/2015",
-      "company": "Everis",
+      "dates": "2015 – 2015",
+      "company": "Everis (now NTT Data)",
       "location": "Barcelona",
       "bullets": [
-        "Software Architecture group — La Caixa (banking) and UOC (university)",
+        "Contributed to software architecture evolution and Continuous Delivery improvements for La Caixa (banking) and UOC (university)",
         "Software architecture, Continuous Delivery and API Management",
         "Supported one team in improving Agile processes and technical practices"
       ]
     },
     {
       "role": "Solutions Architect",
-      "dates": "03/2012 – 01/2015",
-      "company": "Thomson Reuters",
+      "dates": "2012 – 2015",
+      "company": "Thomson Reuters Life Sciences (now Clarivate Analytics)",
       "location": "Barcelona",
-      "desc": "Life Sciences division (now Clarivate Analytics) — drug design data for the Pharma industry.",
+      "desc": "Thomson Reuters manages information for professionals. The Life Sciences division managed data useful for drug design in the Pharma industry such as clinical trials, regulatory information, and scientific literature.",
       "bullets": [
         "Developed and deployed Cortellis; progressed from Lead Senior Analyst Programmer to Solutions Architect",
         "Built data APIs, Web Services and Applications in Java and Scala",
@@ -91,7 +117,7 @@
     },
     {
       "role": "Software Developer",
-      "dates": "03/2010 – 03/2012",
+      "dates": "2010 – 2012",
       "company": "Omatech",
       "location": "Barcelona",
       "bullets": [
@@ -125,7 +151,7 @@
       "company": "Oracle Consulting",
       "location": "Barcelona",
       "bullets": [
-        "Developed and managed on-site projects — Web, Java and Oracle Databases; teams up to 5 people"
+        "Developed and led project delivery across multiple client sites in Spain, using Oracle, Java, and Web technologies. Managed teams of up to 5 people."
       ]
     }
   ],
@@ -134,13 +160,13 @@
       "degree": "Computers Engineer (Ingeniero en Informática)",
       "school": "FIB – Universitat Politècnica de Catalunya",
       "location": "Barcelona",
-      "year": "09/1997"
+      "year": "1989 - 1997"
     },
     {
       "degree": "Postgraduate in Agile Methods for Product Development (PMA)",
       "school": "BES La Salle – Universitat Ramon Llull",
       "location": "Barcelona",
-      "year": "09/2013"
+      "year": "2012 - 2013"
     },
     {
       "degree": "Philosophy",
@@ -152,15 +178,15 @@
   "certifications": [
     {
       "name": "Kanban Management Professional (KMP2)",
-      "issuer": "José Casal"
+      "issuer": "Kanban University"
     },
     {
       "name": "Certified Scrum Master",
-      "issuer": "Agile Alliance, Xavier Quesada"
+      "issuer": "Agile Alliance"
     },
     {
       "name": "DSDM Atern Practitioner",
-      "issuer": "Dot Tudor"
+      "issuer": "APMG International"
     },
     {
       "name": "Professional Scrum Master I",
@@ -168,7 +194,7 @@
     },
     {
       "name": "Co-Active Coaching",
-      "issuer": "CTI"
+      "issuer": "Coaches Training Institute (CTI)"
     }
   ],
   "training": [
@@ -213,7 +239,7 @@
     },
     {
       "label": "Technology & Infrastructure",
-      "tags": "Application Security · Engineering Practices · Cloud Computing · Continuous Delivery · Data APIs · Web Services · Databases"
+      "tags": "Application Security · Engineering Practices · Cloud Computing · Continuous Delivery · Data APIs · Web Services · Databases · GenAI for Software Engineering · SDLC · SOC 2 · Developer Experience (DevEx)"
     },
     {
       "label": "Soft Skills",

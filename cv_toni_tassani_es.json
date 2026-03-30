@@ -1,0 +1,257 @@
+{
+  "name": "Toni Tassani",
+  "title": "VP de Ingeniería",
+  "photo_path": "profile_tonitassani.jpeg",
+  "output_pdf": "cv_toni_tassani_es.pdf",
+  "contact": {
+    "phone": "+34688418191",
+    "email": "toni.tassani@gmail.com",
+    "linkedin": "linkedin.com/in/tonitassani",
+    "website": "humblyproud.com",
+    "location": "Barcelona"
+  },
+  "summary": "Líder de ingeniería en la intersección entre la excelencia técnica y la dinámica humana. Más de 25 años abarcando desarrollo de software, arquitectura, coaching Agile y liderazgo sénior. En Ocado Technology, construí y lideré una función de Prácticas de Ingeniería de ~25 personas — incluyendo Seguridad de Aplicaciones (~15), Engineering Practice Leads y Agile Coaching — impulsando la Productividad de Ingeniería y la Experiencia del Desarrollador entre 2.500 tecnólogos en 8 ubicaciones. Me energizan los retos sociotécnicos: el coaching individual, la facilitación del cambio y el diseño de organizaciones que reducen la fricción y mejoran los resultados.",
+  "experience": [
+    {
+      "role": "VP de Prácticas de Ingeniería y Seguridad de Aplicaciones",
+      "dates": "2025 – Presente",
+      "company": "Ocado Technology",
+      "location": "Barcelona",
+      "desc": "Ocado Technology ofrece la Ocado Smart Platform (OSP) —una solución integral de automatización y comercio electrónico— a 13 socios minoristas internacionales. ~2.500 tecnólogos en 8 ubicaciones; más de 3.000 patentes en logística basada en IA.",
+      "bullets": [
+        "Reporte directo al CTO; parte del área de Productividad de Ingeniería",
+        "Identificar las mejores prácticas de ingeniería y extenderlas por toda la organización",
+        "Responsable de Seguridad de Aplicaciones, Lean y Agile, y el SDLC",
+        "Liderando la adopción de **IA Generativa para Ingeniería de Software** (pruebas, métricas, alineación, habilitación)",
+        "Liderando la función de Seguridad de Aplicaciones (~20 personas), 4 Engineering Practice Leads, un experto en Accesibilidad y un Agile Coach",
+        "Midiendo indicadores de Productividad de Ingeniería y Experiencia del Desarrollador, cualitativa y cuantitativamente",
+        "Trabajando con equipos de Cloud y SRE para identificar optimizaciones financieras en el consumo cloud",
+        "Supervisando el cumplimiento normativo y los costes de aplicaciones y procesos para SOC 2"
+      ]
+    },
+    {
+      "role": "Deputy CTO",
+      "dates": "2022 – 2025",
+      "company": "",
+      "location": "",
+      "bullets": [
+        "Continué liderando Prácticas de Ingeniería y Seguridad de Aplicaciones con un ámbito organizativo ampliado"
+      ]
+    },
+    {
+      "role": "Deputy Chief Engineering Officer - Ingeniería",
+      "dates": "2019 – 2022",
+      "company": "",
+      "location": "",
+      "bullets": [
+        "Construí la función de Prácticas de Ingeniería desde cero, colaborando con el Deputy CEngO de Tecnología para promover la excelencia en arquitectura de software y entrega en toda la organización"
+      ]
+    },
+    {
+      "role": "Engineering Manager (Asignación)",
+      "dates": "2019 – 2019",
+      "company": "",
+      "location": "",
+      "bullets": [
+        "Asignación temporal para establecer una función de SRE dentro de Platform Services en Barcelona, antes de incorporarme al área de Prácticas de Ingeniería"
+      ]
+    },
+    {
+      "role": "Catalyst (Coach Lean y Agile)",
+      "dates": "2018 – 2019",
+      "company": "",
+      "location": "",
+      "bullets": [
+        "Miembro del equipo de Catalysts, unas 10 personas, centrado en Cultura, Efectividad y Eficiencia mediante herramientas Agile y Lean"
+      ]
+    },
+    {
+      "role": "Agile Coach",
+      "dates": "2015 – 2018",
+      "company": "eDreams ODIGEO",
+      "location": "Barcelona",
+      "desc": "Agencia de viajes online con 1.700 empleados, más de 400 en IT, con sede en Barcelona.",
+      "bullets": [
+        "Lideré la transformación Agile con un grupo de 10 coaches; usando Kanban con el apoyo de David J. Anderson",
+        "Implantación en más de 50 equipos de desarrollo; coaching a 14 equipos (máximo 4 simultáneos)",
+        "Aplicación de Kanban en equipos no IT: Aprendizaje y Desarrollo y Help Desk",
+        "Impartí formación en Kanban, Estilos Sociales, feedback efectivo, comunicación visual y otros temas",
+        "Apoyé la mejora continua del grupo de DevOps; gestioné conflictos entre equipos; coaching individual",
+        "Rediseño organizativo con Managers de Desarrollo; kick-start con 80 participantes (apoyo de McKinsey)",
+        "Desarrollé una herramienta de visualización de madurez Kanban usando JavaScript / D3.js",
+        "Realicé sesiones de Impact Mapping con POs; identifiqué flujos de valor; presenté el plan ágil a la dirección"
+      ]
+    },
+    {
+      "role": "Profesor (a tiempo parcial)",
+      "dates": "2014 – Presente",
+      "company": "La Salle",
+      "location": "Barcelona",
+      "bullets": [
+        "Docencia de Metodologías Ágiles a estudiantes internacionales de posgrado en el Máster en Gestión de Proyectos, abarcando contextos de software y no software"
+      ]
+    },
+    {
+      "role": "Consultor",
+      "dates": "2015 – 2015",
+      "company": "Everis (ahora NTT Data)",
+      "location": "Barcelona",
+      "bullets": [
+        "Contribuí a la evolución de la arquitectura de software y a mejoras en Entrega Continua para La Caixa (banca) y la UOC (universidad)",
+        "Arquitectura de software, Entrega Continua y API Management",
+        "Apoyé a un equipo en la mejora de procesos ágiles y prácticas técnicas"
+      ]
+    },
+    {
+      "role": "Arquitecto de Soluciones",
+      "dates": "2012 – 2015",
+      "company": "Thomson Reuters Life Sciences (ahora Clarivate Analytics)",
+      "location": "Barcelona",
+      "desc": "Thomson Reuters gestiona información para profesionales. La división Life Sciences administraba datos relevantes para el diseño de fármacos en la industria farmacéutica, como ensayos clínicos, información regulatoria y literatura científica.",
+      "bullets": [
+        "Desarrollé y desplegué Cortellis; progresé de Analista Programador Sénior a Arquitecto de Soluciones",
+        "Construí APIs de datos, Servicios Web y Aplicaciones en Java y Scala",
+        "Colaboré con el departamento de DevOps emergente; facilité reuniones; formé equipos distribuidos",
+        "Transicioné las metodologías hacia DSDM Atern y Scrum"
+      ]
+    },
+    {
+      "role": "Desarrollador de Software",
+      "dates": "2010 – 2012",
+      "company": "Omatech",
+      "location": "Barcelona",
+      "bullets": [
+        "Consultor para Thomson Reuters Barcelona tras la adquisición de Prous Science",
+        "Formé al equipo de desarrollo en prácticas modernas y Java; ayudé en la transición ágil",
+        "Colaboré en el desarrollo de una aplicación web para científicos del sector farmacéutico"
+      ]
+    },
+    {
+      "role": "Development Manager y Arquitecto",
+      "dates": "2004 – 2010",
+      "company": "Stacks Consulting",
+      "location": "Barcelona",
+      "bullets": [
+        "Development Manager y Arquitecto; equipo de 15 personas entre Barcelona y Madrid",
+        "Puse en marcha el nuevo departamento de desarrollo Java; construí una aplicación web de gestión de Atención Primaria para Madrid"
+      ]
+    },
+    {
+      "role": "Profesor (a tiempo parcial)",
+      "dates": "2003 – 2012",
+      "company": "Universitat Oberta de Catalunya (UOC)",
+      "location": "Barcelona",
+      "bullets": [
+        "Profesor a tiempo parcial de asignaturas de bases de datos en la universidad abierta (educación a distancia)"
+      ]
+    },
+    {
+      "role": "Consultor",
+      "dates": "1996 – 2004",
+      "company": "Oracle Consulting",
+      "location": "Barcelona",
+      "bullets": [
+        "Desarrollé y lideré la entrega de proyectos en múltiples clientes en España, usando Oracle, Java y tecnologías Web. Gestioné equipos de hasta 5 personas."
+      ]
+    }
+  ],
+  "education": [
+    {
+      "degree": "Ingeniero en Informática",
+      "school": "FIB – Universitat Politècnica de Catalunya",
+      "location": "Barcelona",
+      "year": "1989 - 1997"
+    },
+    {
+      "degree": "Posgrado en Métodos Ágiles para el Desarrollo de Producto (PMA)",
+      "school": "BES La Salle – Universitat Ramon Llull",
+      "location": "Barcelona",
+      "year": "2012 - 2013"
+    },
+    {
+      "degree": "Filosofía",
+      "school": "Universidad Nacional de Educación a Distancia (UNED)",
+      "location": "Barcelona",
+      "year": "2024 – Presente"
+    }
+  ],
+  "certifications": [
+    {
+      "name": "Kanban Management Professional (KMP2)",
+      "issuer": "Kanban University"
+    },
+    {
+      "name": "Certified Scrum Master",
+      "issuer": "Agile Alliance"
+    },
+    {
+      "name": "DSDM Atern Practitioner",
+      "issuer": "APMG International"
+    },
+    {
+      "name": "Professional Scrum Master I",
+      "issuer": "Scrum.org"
+    },
+    {
+      "name": "Co-Active Coaching",
+      "issuer": "Coaches Training Institute (CTI)"
+    }
+  ],
+  "training": [
+    {
+      "name": "Facilitación Gráfica",
+      "issuer": "Brandy Agerbeck"
+    },
+    {
+      "name": "Framework Cynefin",
+      "issuer": "Liz Keogh"
+    },
+    {
+      "name": "Liderando Equipos Ágiles",
+      "issuer": "Angel Medinilla"
+    }
+  ],
+  "languages": [
+    {
+      "name": "Catalán",
+      "level": "Nativo",
+      "dots": 5
+    },
+    {
+      "name": "Castellano",
+      "level": "Nativo",
+      "dots": 5
+    },
+    {
+      "name": "Inglés",
+      "level": "Avanzado",
+      "dots": 4
+    }
+  ],
+  "skills": [
+    {
+      "label": "Lenguajes de Programación",
+      "tags": "Java · TypeScript · JavaScript · Scala · Python · PL/SQL · C++"
+    },
+    {
+      "label": "Metodologías y Frameworks",
+      "tags": "Agile · Lean · Scrum · Kanban · DevOps · eXtreme Programming · TDD"
+    },
+    {
+      "label": "Tecnología e Infraestructura",
+      "tags": "Seguridad de Aplicaciones · Prácticas de Ingeniería · Cloud Computing · Entrega Continua · APIs de Datos · Servicios Web · Bases de Datos · GenAI para Ingeniería de Software · SDLC · SOC 2 · Experiencia del Desarrollador (DevEx)"
+    },
+    {
+      "label": "Habilidades Interpersonales",
+      "tags": "Liderazgo Técnico · Construcción de Equipos · Coaching · Facilitación · Gestión del Cambio · Formación · Resolución de Conflictos"
+    },
+    {
+      "label": "Analítica y Métricas",
+      "tags": "Análisis de Datos · Métricas e Indicadores (KPIs) · Desarrollo de Producto"
+    },
+    {
+      "label": "Habilidades Creativas",
+      "tags": "Pensamiento Visual · Sketchnoting · Urbansketching"
+    }
+  ]
+}
