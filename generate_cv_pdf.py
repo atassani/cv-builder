@@ -684,6 +684,8 @@ def main():
 
     cv = CV(data["output_path"])
     c  = cv.c
+    c.setTitle(f"{data['name']} – {data['title']}")
+    c.setAuthor(data["name"])
 
     # ── SIDEBAR – page 1 content ─────────────────────────────────────
     # Skills are intentionally excluded here; they go to page 2 via the
