@@ -17,6 +17,7 @@ Font files should be in a 'fonts/' folder next to this script
 import argparse
 import json
 import os
+import re
 import sys
 
 try:
@@ -385,6 +386,59 @@ def wrap_text(text, font, size, max_w):
     return lines or [""]
 
 
+def parse_rich(text):
+    """Split text on **bold** markers → [(segment, is_bold), ...]"""
+    result = []
+    for i, part in enumerate(re.split(r"\*\*(.+?)\*\*", text)):
+        if part:
+            result.append((part, bool(i % 2)))
+    return result
+
+
+def wrap_rich(segments, reg_font, bold_font, size, max_w):
+    """Word-wrap rich segments. Returns list of lines; each line is [(text, is_bold)]."""
+    # Flatten into (word, is_bold) tokens preserving inter-word spaces
+    tokens = []
+    for seg, bold in segments:
+        for i, word in enumerate(seg.split(" ")):
+            if i > 0:
+                tokens.append((" ", bold))
+            if word:
+                tokens.append((word, bold))
+
+    lines, cur_segs, cur_w = [], [], 0.0
+    for tok, bold in tokens:
+        font = bold_font if bold else reg_font
+        tok_w = SW(tok, font, size)
+        if not cur_segs or cur_w + tok_w <= max_w:
+            cur_segs.append((tok, bold))
+            cur_w += tok_w
+        else:
+            # trim trailing spaces, start new line
+            while cur_segs and cur_segs[-1][0] == " ":
+                cur_segs.pop()
+            lines.append(cur_segs)
+            cur_segs = [] if tok == " " else [(tok, bold)]
+            cur_w = 0.0 if tok == " " else tok_w
+
+    while cur_segs and cur_segs[-1][0] == " ":
+        cur_segs.pop()
+    if cur_segs:
+        lines.append(cur_segs)
+    return lines or [[("", False)]]
+
+
+def draw_rich_line(c, x, y, line_segs, reg_font, bold_font, size, color):
+    """Draw one line of mixed normal/bold segments starting at (x, y)."""
+    c.setFillColor(color)
+    cx = x
+    for text, bold in line_segs:
+        font = bold_font if bold else reg_font
+        c.setFont(font, size)
+        c.drawString(cx, y, text)
+        cx += SW(text, font, size)
+
+
 # ─────────────────────────────────────────────────────────────────────────────
 # CANVAS STATE
 # ─────────────────────────────────────────────────────────────────────────────
@@ -566,14 +620,19 @@ class CV:
             btw    = MAIN_TW - indent - 1.5 * mm
             lh     = 8.5 * 1.3
             for b in bullets:
-                blines = wrap_text(b, "OpenSans-Regular", 8.5, btw)
+                blines = wrap_rich(
+                    parse_rich(b), "OpenSans-Regular", "OpenSans-Bold", 8.5, btw
+                )
                 if self.my - len(blines) * lh < PAD_BOT + 10 * mm:
                     self.new_page()
                 self.c.setFont("OpenSans-Regular", 8.5)
                 self.c.setFillColor(TEXT)
                 self.c.drawString(PAD_ML + 1.2 * mm, self.my, "•")
-                for j, line in enumerate(blines):
-                    self.c.drawString(PAD_ML + indent, self.my - j * lh, line)
+                for j, line_segs in enumerate(blines):
+                    draw_rich_line(
+                        self.c, PAD_ML + indent, self.my - j * lh,
+                        line_segs, "OpenSans-Regular", "OpenSans-Bold", 8.5, TEXT,
+                    )
                 self.my -= len(blines) * lh
 
         self.my -= 4.5 * mm   # gap between jobs

@@ -15,6 +15,7 @@ import base64
 import html
 import json
 import os
+import re
 import xml.etree.ElementTree as ET
 
 SCRIPT_DIR = os.path.dirname(os.path.abspath(__file__))
@@ -80,6 +81,18 @@ def esc(text):
     return html.escape(str(text))
 
 
+def rich_esc(text):
+    """HTML-escape text and convert **bold** markers to <strong>."""
+    parts = re.split(r"\*\*(.+?)\*\*", str(text))
+    result = []
+    for i, part in enumerate(parts):
+        if i % 2 == 0:
+            result.append(html.escape(part))
+        else:
+            result.append(f"<strong>{html.escape(part)}</strong>")
+    return "".join(result)
+
+
 def dots_html(filled, total=5):
     parts = []
     for i in range(total):
@@ -111,7 +124,7 @@ def build_experience(jobs):
         if job.get("bullets"):
             lines.append('      <ul class="bl">')
             for b in job["bullets"]:
-                lines.append(f'        <li>{esc(b)}</li>')
+                lines.append(f'        <li>{rich_esc(b)}</li>')
             lines.append('      </ul>')
         lines.append('    </div>')
         parts.append("\n".join(lines))
