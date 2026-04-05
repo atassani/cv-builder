@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Toni Tassani - VP of Engineering</title>
+  <style>
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+:root {
+  --paper: #fffdfa;
+  --ink: #171717;
+  --subtle: #5d564e;
+  --rule: #d7d0c2;
+}
+
+html {
+  background: #efece6;
+}
+
+body {
+  margin: 0;
+  background: #efece6;
+  color: var(--ink);
+  font-family: "Iowan Old Style", "Palatino Linotype", "Book Antiqua", Georgia, serif;
+  line-height: 1.45;
+}
+
+.page {
+  width: 210mm;
+  min-height: 297mm;
+  margin: 18px auto;
+  padding: 15mm 14mm 14mm 15mm;
+  background: var(--paper);
+  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.12);
+}
+
+.header h1 {
+  margin: 0;
+  font-size: 26pt;
+  font-weight: 700;
+  line-height: 1;
+}
+
+.header .title {
+  margin-top: 5px;
+  color: var(--subtle);
+  font-size: 15pt;
+  font-style: italic;
+}
+
+.contact-line {
+  margin-top: 8px;
+  color: var(--subtle);
+  font-size: 10.5pt;
+}
+
+.header-rule {
+  border: 0;
+  border-top: 1px solid var(--rule);
+  margin: 10px 0 14px;
+}
+
+.section {
+  margin-top: 14px;
+}
+
+.section-head {
+  display: grid;
+  grid-template-columns: 23mm 1fr;
+  gap: 7mm;
+  align-items: end;
+  margin-bottom: 8px;
+}
+
+.section-head .label {
+  color: var(--subtle);
+  font-size: 9pt;
+  font-weight: 700;
+  letter-spacing: 0.05em;
+}
+
+.section-head .rule {
+  border-bottom: 1px solid var(--rule);
+  height: 1px;
+}
+
+.summary {
+  font-size: 11.2pt;
+  margin: 0;
+}
+
+.company-group {
+  margin-bottom: 10px;
+  padding-top: 4px;
+}
+
+.company-name {
+  margin: 0 0 1px 30mm;
+  font-size: 12.6pt;
+  font-weight: 700;
+}
+
+.company-location {
+  margin: 0 0 4px 30mm;
+  color: var(--subtle);
+  font-size: 9.8pt;
+}
+
+.company-location-label {
+  font-size: 8pt;
+  font-style: italic;
+}
+
+.company-desc {
+  margin: 0 0 5px 30mm;
+  color: var(--subtle);
+  font-size: 10pt;
+  font-style: italic;
+}
+
+.kv-line,
+.tagged-line {
+  margin: 0 0 4px 30mm;
+  font-size: 10.4pt;
+}
+
+.kv-label,
+.tag-label {
+  color: var(--subtle);
+  font-size: 8.2pt;
+  font-style: italic;
+  font-weight: 700;
+}
+
+.entry-date {
+  color: var(--subtle);
+  font-size: 8.8pt;
+  font-style: italic;
+}
+
+.role-entry,
+.edu-entry {
+  display: grid;
+  grid-template-columns: 23mm 1fr;
+  gap: 7mm;
+  margin-bottom: 6px;
+}
+
+.role-title {
+  margin: 0 0 3px;
+  font-size: 12pt;
+  font-weight: 700;
+}
+
+.bullet-list {
+  margin: 0;
+  padding-left: 16px;
+}
+
+.bullet-list li {
+  margin: 0 0 2px;
+  font-size: 10pt;
+}
+
+.bullet-list.compact li {
+  margin-bottom: 3px;
+}
+
+@media print {
+  html,
+  body {
+    background: none;
+  }
+
+  .page {
+    margin: 0;
+    box-shadow: none;
+    width: auto;
+    min-height: auto;
+  }
+
+  @page {
+    size: A4;
+    margin: 0;
+  }
+}
+
+  </style>
+</head>
+<body>
+  <main class="page">
+    <header class="header">
+      <h1>Toni Tassani</h1>
+      <div class="title">VP of Engineering</div>
+      <div class="contact-line">Barcelona | +34688418191 | toni.tassani@gmail.com | linkedin.com/in/tonitassani | humblyproud.com</div>
+      <hr class="header-rule">
+    </header>
+
+    <section class="section">
+      <div class="section-head"><div class="label">SUMMARY</div><div class="rule"></div></div>
+      <p class="summary">Engineering leader at the intersection of technical excellence and human dynamics. Over 25 years spanning software development, architecture, Agile coaching, and senior leadership.</p>
+    </section>
+
+    <section class="section">
+      <div class="section-head"><div class="label">EXPERIENCE</div><div class="rule"></div></div>
+      <section class="company-group"><h3 class="company-name">Ocado Technology</h3><p class="company-location"><span class="company-location-label">location</span> <span class="company-location-value">Barcelona</span></p><p class="company-desc">Ocado Technology provides the Ocado Smart Platform (OSP)—an end-to-end automation and e-commerce solution—to 13 international retail partners.</p><article class="role-entry"><aside class="entry-date">2025 – Present</aside><div class="entry-body"><h3 class="role-title">VP of Engineering Practices and Application Security</h3><ul class="bullet-list"><li>Reporting to the CTO; part of the Engineering Productivity stream</li><li>Identifying best engineering practices and extending them across the organisation</li><li>Responsible for Application Security, Lean and Agile, and the SDLC</li><li>Leading adoption of Gen AI for Software Engineering (trials, metrics, alignment, enablement)</li><li>Leading the Application Security function (~20 people), 4 Engineering Practice Leads, an Accessibility expert and an Agile Coach</li></ul></div></article><article class="role-entry"><aside class="entry-date">2022 – 2025</aside><div class="entry-body"><h3 class="role-title">Deputy CTO</h3><ul class="bullet-list"><li>Continued leading Engineering Practices and Application Security with expanded organisational remit</li></ul></div></article><article class="role-entry"><aside class="entry-date">2019 – 2022</aside><div class="entry-body"><h3 class="role-title">Deputy Chief Engineering Officer - Engineering</h3><ul class="bullet-list"><li>Built the Engineering Practices function from the ground up, partnering with the Deputy CEngO for Technology to promote software architecture and delivery excellence across the organisation</li></ul></div></article><article class="role-entry"><aside class="entry-date">2019 – 2019</aside><div class="entry-body"><h3 class="role-title">Engineering Manager (Assignment)</h3><ul class="bullet-list"><li>Short-term assignment to establish an SRE function within Platform Services in Barcelona, before transitioning to the Engineering Practices stream</li></ul></div></article><article class="role-entry"><aside class="entry-date">2018 – 2019</aside><div class="entry-body"><h3 class="role-title">Catalyst (Lean and Agile Coach)</h3><ul class="bullet-list"><li>Member of the Catalysts team, around 10 people, focusing on Culture, Effectiveness and Efficiency using Agile and Lean tools</li></ul></div></article></section><section class="company-group"><h3 class="company-name">eDreams ODIGEO</h3><p class="company-location"><span class="company-location-label">location</span> <span class="company-location-value">Barcelona</span></p><article class="role-entry"><aside class="entry-date">2015 – 2018</aside><div class="entry-body"><h3 class="role-title">Agile Coach</h3><ul class="bullet-list"><li>Led Agile transformation with a group of 10 coaches; using Kanban with support from David J. Anderson</li><li>Rolled out to 50+ development teams; coached 14 teams (max 4 at a time)</li><li>Applied Kanban in non-IT teams: Learning &amp; Development and Help Desk</li></ul></div></article></section><section class="company-group"><h3 class="company-name">La Salle</h3><p class="company-location"><span class="company-location-label">location</span> <span class="company-location-value">Barcelona</span></p><article class="role-entry"><aside class="entry-date">2014 – Present</aside><div class="entry-body"><h3 class="role-title">Lecturer (part-time)</h3><ul class="bullet-list"><li>Teaching Agile Methodologies to international postgraduate students in the Master in Project Management, covering both software and non-software contexts</li></ul></div></article></section><section class="company-group"><h3 class="company-name">Everis (now NTT Data)</h3><p class="company-location"><span class="company-location-label">location</span> <span class="company-location-value">Barcelona</span></p><article class="role-entry"><aside class="entry-date">2015 – 2015</aside><div class="entry-body"><h3 class="role-title">Consultant</h3><ul class="bullet-list"><li>Contributed to software architecture evolution and Continuous Delivery improvements for La Caixa (banking) and UOC (university)</li><li>Software architecture, Continuous Delivery and API Management</li><li>Supported one team in improving Agile processes and technical practices</li></ul></div></article></section><section class="company-group"><h3 class="company-name">Thomson Reuters Life Sciences (now Clarivate Analytics)</h3><p class="company-location"><span class="company-location-label">location</span> <span class="company-location-value">Barcelona</span></p><article class="role-entry"><aside class="entry-date">2012 – 2015</aside><div class="entry-body"><h3 class="role-title">Solutions Architect</h3><ul class="bullet-list"><li>Developed and deployed Cortellis; progressed from Lead Senior Analyst Programmer to Solutions Architect</li><li>Built data APIs, Web Services and Applications in Java and Scala</li><li>Collaborated with emerging DevOps department; facilitated meetings; trained distributed teams</li></ul></div></article></section><section class="company-group"><h3 class="company-name">Omatech</h3><p class="company-location"><span class="company-location-label">location</span> <span class="company-location-value">Barcelona</span></p><article class="role-entry"><aside class="entry-date">2010 – 2012</aside><div class="entry-body"><h3 class="role-title">Software Developer</h3><ul class="bullet-list"><li>Consultant for Thomson Reuters Barcelona following the acquisition of Prous Science</li><li>Trained the development team in modern practices and Java; helped with Agile transition</li><li>Assisted in building a web application for Pharma scientists</li></ul></div></article></section><section class="company-group"><h3 class="company-name">Stacks Consulting</h3><p class="company-location"><span class="company-location-label">location</span> <span class="company-location-value">Barcelona</span></p><article class="role-entry"><aside class="entry-date">2004 – 2010</aside><div class="entry-body"><h3 class="role-title">Development Manager &amp; Architect</h3><ul class="bullet-list"><li>Development Manager and Architect; team of 15 across Barcelona and Madrid</li><li>Set up new Java development department; built Primary Care management web app for Madrid</li></ul></div></article></section><section class="company-group"><h3 class="company-name">Universitat Oberta de Catalunya (UOC)</h3><p class="company-location"><span class="company-location-label">location</span> <span class="company-location-value">Barcelona</span></p><article class="role-entry"><aside class="entry-date">2003 – 2012</aside><div class="entry-body"><h3 class="role-title">Lecturer (part-time)</h3><ul class="bullet-list"><li>Part-time Lecturer in database subjects at the Open University (distance learning)</li></ul></div></article></section><section class="company-group"><h3 class="company-name">Oracle Consulting</h3><p class="company-location"><span class="company-location-label">location</span> <span class="company-location-value">Barcelona</span></p><article class="role-entry"><aside class="entry-date">1996 – 2004</aside><div class="entry-body"><h3 class="role-title">Consultant</h3><ul class="bullet-list"><li>Developed and led project delivery across multiple client sites in Spain, using Oracle, Java, and Web technologies. Managed teams of up to 5 people.</li></ul></div></article></section>
+    </section>
+
+    <section class="section">
+      <div class="section-head"><div class="label">EDUCATION</div><div class="rule"></div></div>
+      <article class="edu-entry"><aside class="entry-date">1989 - 1997</aside><div class="entry-body"><h3 class="role-title">Computers Engineer (Ingeniero en Informática)</h3><p class="kv-line"><span class="kv-label">Institution:</span> <span class="kv-value">FIB – Universitat Politècnica de Catalunya</span></p><p class="kv-line"><span class="kv-label">Location:</span> <span class="kv-value">Barcelona</span></p></div></article><article class="edu-entry"><aside class="entry-date">2012 - 2013</aside><div class="entry-body"><h3 class="role-title">Postgraduate in Agile Methods for Product Development (PMA)</h3><p class="kv-line"><span class="kv-label">Institution:</span> <span class="kv-value">BES La Salle – Universitat Ramon Llull</span></p><p class="kv-line"><span class="kv-label">Location:</span> <span class="kv-value">Barcelona</span></p></div></article><article class="edu-entry"><aside class="entry-date">2024 – Present</aside><div class="entry-body"><h3 class="role-title">Philosophy</h3><p class="kv-line"><span class="kv-label">Institution:</span> <span class="kv-value">National University of Distance Education (UNED)</span></p><p class="kv-line"><span class="kv-label">Location:</span> <span class="kv-value">Barcelona</span></p></div></article>
+    </section>
+
+    <section class="section">
+      <div class="section-head"><div class="label">ADDITIONAL</div><div class="rule"></div></div>
+      <p class="tagged-line"><span class="tag-label">Languages:</span> <span class="tag-value">Catalan (Native) | Spanish (Native) | English (Proficient)</span></p><p class="tagged-line"><span class="tag-label">Programming Languages:</span> <span class="tag-value">Java · TypeScript · JavaScript · Scala · Python · PL/SQL · C++</span></p><p class="tagged-line"><span class="tag-label">Methodologies &amp; Frameworks:</span> <span class="tag-value">Agile · Lean · Scrum · Kanban · DevOps · eXtreme Programming · TDD</span></p><p class="tagged-line"><span class="tag-label">Technology &amp; Infrastructure:</span> <span class="tag-value">Application Security · Engineering Practices · Cloud Computing · Continuous Delivery · Data APIs · Web Services · Databases · GenAI for Software Engineering · SDLC · SOC 2 · Developer Experience (DevEx)</span></p><p class="tagged-line"><span class="tag-label">Soft Skills:</span> <span class="tag-value">Technical Leadership · Team Building · Coaching · Facilitation · Change Management · Training · Conflict Resolution</span></p><p class="tagged-line"><span class="tag-label">Analytics &amp; Metrics:</span> <span class="tag-value">Data Analysis · Metrics and KPIs · Product Development</span></p><p class="tagged-line"><span class="tag-label">Creative Skills:</span> <span class="tag-value">Visual Thinking · Sketchnoting · Urbansketching</span></p><div class="additional-list"><p class="tagged-line"><span class="tag-label">Certifications:</span></p><ul class="bullet-list compact"><li>Kanban Management Professional (KMP2), Kanban University</li><li>Certified Scrum Master, Agile Alliance</li><li>DSDM Atern Practitioner, APMG International</li><li>Professional Scrum Master I, Scrum.org</li><li>Co-Active Coaching, Coaches Training Institute (CTI)</li><li>Graphic Facilitation, Brandy Agerbeck</li><li>Cynefin Framework, Liz Keogh</li><li>Leading Agile Teams, Angel Medinilla</li></ul></div>
+    </section>
+  </main>
+</body>
+</html>
