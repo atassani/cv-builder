@@ -19,7 +19,9 @@ try:
     from reportlab.lib.colors import HexColor
     from reportlab.lib.pagesizes import A4
     from reportlab.lib.units import mm
+    from reportlab.pdfbase import pdfmetrics
     from reportlab.pdfbase.pdfmetrics import stringWidth as SW
+    from reportlab.pdfbase.ttfonts import TTFont
     from reportlab.pdfgen import canvas
 except ModuleNotFoundError as exc:
     missing_module = exc.name or "a required dependency"
@@ -53,8 +55,69 @@ DEFAULT_LABELS = {
 FONT_SERIF = "Times-Roman"
 FONT_SERIF_BOLD = "Times-Bold"
 FONT_SERIF_ITALIC = "Times-Italic"
-FONT_SANS = "Times-Roman"
-FONT_SANS_BOLD = "Times-Bold"
+FONT_SANS = FONT_SERIF
+FONT_SANS_BOLD = FONT_SERIF_BOLD
+
+
+def register_preferred_fonts():
+    global FONT_SERIF, FONT_SERIF_BOLD, FONT_SERIF_ITALIC, FONT_SANS, FONT_SANS_BOLD
+
+    preferred_sets = [
+        {
+            "regular": ("ETBook-Roman", [
+                os.path.join(SCRIPT_DIR, "et-book", "et-book-roman-line-figures", "et-book-roman-line-figures.ttf"),
+                os.path.join(SCRIPT_DIR, "et-book", "et-book-roman-old-style-figures", "et-book-roman-old-style-figures.ttf"),
+            ]),
+            "bold": ("ETBook-Bold", [
+                os.path.join(SCRIPT_DIR, "et-book", "et-book-bold-line-figures", "et-book-bold-line-figures.ttf"),
+                os.path.join(SCRIPT_DIR, "et-book", "et-book-semibold-old-style-figures", "et-book-semibold-old-style-figures.ttf"),
+            ]),
+            "italic": ("ETBook-Italic", [
+                os.path.join(SCRIPT_DIR, "et-book", "et-book-display-italic-old-style-figures", "et-book-display-italic-old-style-figures.ttf"),
+            ]),
+        },
+        {
+            "regular": ("Georgia", ["/System/Library/Fonts/Supplemental/Georgia.ttf"]),
+            "bold": ("Georgia-Bold", ["/System/Library/Fonts/Supplemental/Georgia Bold.ttf"]),
+            "italic": ("Georgia-Italic", ["/System/Library/Fonts/Supplemental/Georgia Italic.ttf"]),
+            "bold_italic": ("Georgia-BoldItalic", ["/System/Library/Fonts/Supplemental/Georgia Bold Italic.ttf"]),
+        },
+    ]
+
+    for font_set in preferred_sets:
+        resolved = {}
+        for key, (font_name, candidates) in font_set.items():
+            path = next((candidate for candidate in candidates if os.path.exists(candidate)), None)
+            if path is None:
+                resolved = {}
+                break
+            resolved[key] = (font_name, path)
+        if not resolved:
+            continue
+
+        for font_name, path in resolved.values():
+            if font_name not in pdfmetrics.getRegisteredFontNames():
+                pdfmetrics.registerFont(TTFont(font_name, path))
+        FONT_SERIF = resolved["regular"][0]
+        FONT_SERIF_BOLD = resolved["bold"][0]
+        FONT_SERIF_ITALIC = resolved["italic"][0]
+        FONT_SANS = FONT_SERIF
+        FONT_SANS_BOLD = FONT_SERIF_BOLD
+        return
+
+
+def role_title_font_name():
+    candidates = [
+        "ETBook-BoldItalic",
+        "ETBook-BoldItalicAlt",
+        "Georgia-BoldItalic",
+        "Times-BoldItalic",
+    ]
+    registered = set(pdfmetrics.getRegisteredFontNames())
+    for name in candidates:
+        if name in registered:
+            return name
+    return FONT_SERIF_BOLD
 
 
 def parse_args():
@@ -259,12 +322,12 @@ class ResumeRenderer:
         self.y = self.top
 
         self.name_size = 18.0 * scale
-        self.title_size = 10.2 * scale
+        self.title_size = 9.8 * scale
         self.section_size = 8.0 * scale
         self.body_size = 9.5 * scale
         self.meta_size = 8.3 * scale
         self.small_size = 8.5 * scale
-        self.company_size = 10.7 * scale
+        self.company_size = 12 * scale
         self.label_size = 7.4 * scale
 
         self.body_leading = self.body_size * 1.38
@@ -367,10 +430,13 @@ class ResumeRenderer:
         return local_y
 
     def labeled_main_lines(self, pairs):
-        needed = len(pairs) * self.small_leading + 0.8 * mm
+        self.labeled_main_lines_with_gap(pairs, line_gap=0.5 * mm, gap_after=0.5 * mm)
+
+    def labeled_main_lines_with_gap(self, pairs, line_gap=0.0, gap_after=0.5 * mm):
+        needed = len(pairs) * self.small_leading + max(0, len(pairs) - 1) * line_gap + gap_after
         self.ensure_space(needed)
         label_width = max(SW(f"{label}: ", FONT_SANS_BOLD, self.small_size) for label, _ in pairs)
-        for label, value in pairs:
+        for index, (label, value) in enumerate(pairs):
             available = self.main_width - label_width - 4
             lines = wrap_text(value, FONT_SERIF, self.small_size, available)
             self.c.setFont(FONT_SANS_BOLD, self.small_size)
@@ -379,16 +445,37 @@ class ResumeRenderer:
             self.c.setFont(FONT_SERIF, self.small_size)
             self.c.setFillColor(INK)
             value_x = self.main_x + label_width + 4
-            first = True
             for line in lines:
                 self.c.drawString(value_x, self.y, line)
                 self.y -= self.small_leading
-                if not first:
-                    continue
-                first = False
-            self.y += self.small_leading * max(0, len(lines) - 1)
-            self.y -= self.small_leading
-        self.y -= 0.5 * mm
+            if index < len(pairs) - 1:
+                self.y -= line_gap
+        self.y -= gap_after
+
+    def education_meta_lines(self, school, location):
+        line_gap = 0.1 * mm
+        gap_after = 1.2 * mm
+        pairs = [("Institution", school), ("Location", location)]
+        needed = len(pairs) * self.small_leading + line_gap + gap_after
+        self.ensure_space(needed)
+        label_width = max(SW(f"{label}: ", FONT_SANS_BOLD, self.small_size) for label, _ in pairs)
+
+        for index, (label, value) in enumerate(pairs):
+            available = self.main_width - label_width - 4
+            lines = wrap_text(value, FONT_SERIF, self.small_size, available)
+            self.c.setFont(FONT_SANS_BOLD, self.small_size)
+            self.c.setFillColor(SUBTLE)
+            self.c.drawString(self.main_x, self.y, f"{label}:")
+            self.c.setFont(FONT_SERIF, self.small_size)
+            self.c.setFillColor(INK)
+            value_x = self.main_x + label_width + 4
+            for line in lines:
+                self.c.drawString(value_x, self.y, line)
+                self.y -= self.small_leading
+            if index == 0:
+                self.y -= line_gap
+
+        self.y -= gap_after
 
     def company_header(self, company, location):
         needed = self.company_leading + (self.small_leading if location else 0) + 0.6 * mm
@@ -448,13 +535,14 @@ class ResumeRenderer:
             self.y -= 0.4 * mm
 
     def role_block(self, role):
-        role_lines = wrap_text(role["role"], FONT_SERIF_BOLD, self.body_size, self.main_width)
+        role_font = role_title_font_name()
+        role_lines = wrap_text(role["role"], role_font, self.body_size, self.main_width)
         needed = len(role_lines) * self.body_leading + len(role["bullets"]) * self.small_leading + 2 * mm
         self.ensure_space(needed)
 
         margin_bottom = self.draw_margin_dates(role["dates"])
 
-        self.c.setFont(FONT_SERIF_BOLD, self.body_size)
+        self.c.setFont(role_font, self.body_size)
         self.c.setFillColor(INK)
         for line in role_lines:
             self.c.drawString(self.main_x, self.y, line)
@@ -498,9 +586,9 @@ class ResumeRenderer:
             self.c.drawString(self.main_x, self.y, line)
             self.y -= self.body_leading
 
-        self.labeled_main_lines([("Institution", school), ("Location", location)])
+        self.education_meta_lines(school, location)
         self.y = min(self.y, margin_bottom)
-        self.y -= 0.8 * mm
+        self.y -= 2.8 * mm
 
     def tagged_paragraph(self, tag, text):
         tag_text = f"{tag}:"
@@ -565,6 +653,7 @@ def render_resume(data, stream, scale):
 
 def main():
     args = parse_args()
+    register_preferred_fonts()
     source_data = load_cv_data(args.cv_json, args.output)
     data = prepare_resume_data(source_data)
 

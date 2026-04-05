@@ -279,7 +279,7 @@ body {
   margin: 0;
   background: #efece6;
   color: var(--ink);
-  font-family: "Iowan Old Style", "Palatino Linotype", "Book Antiqua", Georgia, serif;
+  font-family: "et-book", "Palatino Linotype", Palatino, "Book Antiqua", Georgia, serif;
   line-height: 1.45;
 }
 
@@ -382,6 +382,10 @@ body {
   font-size: 10.4pt;
 }
 
+.edu-entry .kv-line {
+  margin-bottom: 1px;
+}
+
 .kv-label,
 .tag-label {
   color: var(--subtle);
@@ -408,6 +412,7 @@ body {
   margin: 0 0 3px;
   font-size: 12pt;
   font-weight: 700;
+  font-style: italic;
 }
 
 .bullet-list {
