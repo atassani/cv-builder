@@ -315,8 +315,8 @@ class ResumeRenderer:
         self.right = 12 * mm
         self.margin_width = 21 * mm
         self.gap = 6 * mm
-        self.main_x = self.left + self.margin_width + self.gap
-        self.main_width = PAGE_W - self.main_x - self.right
+        self.main_x = self.left
+        self.main_width = PAGE_W - self.left - self.right - self.margin_width - self.gap
         self.y = self.top
 
         self.name_size = 18.0 * scale
@@ -422,8 +422,10 @@ class ResumeRenderer:
         local_y = self.y
         self.c.setFont(FONT_SANS, self.meta_size)
         self.c.setFillColor(SUBTLE)
-        for line in wrap_text(text, FONT_SANS, self.meta_size, self.margin_width):
-            self.c.drawString(self.left, local_y, line)
+        lines = wrap_text(text, FONT_SANS, self.meta_size, self.margin_width)
+        for line in lines:
+            text_width = SW(line, FONT_SANS, self.meta_size)
+            self.c.drawString(PAGE_W - self.right - text_width, local_y, line)
             local_y -= self.meta_leading
         return local_y
 

@@ -189,11 +189,11 @@ def build_experience(groups):
             bullets = "".join(f"<li>{rich_esc(bullet)}</li>" for bullet in role["bullets"])
             role_html.append(
                 '<article class="role-entry">'
-                f'<aside class="entry-date">{esc(role["dates"])}</aside>'
                 '<div class="entry-body">'
                 f'<h3 class="role-title">{esc(role["role"])}</h3>'
                 f'<ul class="bullet-list">{bullets}</ul>'
                 "</div>"
+                f'<aside class="entry-date">{esc(role["dates"])}</aside>'
                 "</article>"
             )
 
@@ -215,12 +215,12 @@ def build_education(entries):
     for entry in entries:
         parts.append(
             '<article class="edu-entry">'
-            f'<aside class="entry-date">{esc(entry.get("year", ""))}</aside>'
             '<div class="entry-body">'
             f'<h3 class="role-title">{esc(entry.get("degree", ""))}</h3>'
             f'{meta_line("Institution", entry.get("school", ""))}'
             f'{meta_line("Location", entry.get("location", ""))}'
             "</div>"
+            f'<aside class="entry-date">{esc(entry.get("year", ""))}</aside>'
             "</article>"
         )
     return "".join(parts)
@@ -352,13 +352,13 @@ body {
 }
 
 .company-name {
-  margin: 0 0 1px 30mm;
+  margin: 0 0 1px;
   font-size: 12.6pt;
   font-weight: 700;
 }
 
 .company-location {
-  margin: 0 0 4px 30mm;
+  margin: 0 0 4px;
   color: var(--subtle);
   font-size: 9.8pt;
 }
@@ -369,7 +369,7 @@ body {
 }
 
 .company-desc {
-  margin: 0 0 5px 30mm;
+  margin: 0 0 5px;
   color: var(--subtle);
   font-size: 10pt;
   font-style: italic;
@@ -397,12 +397,13 @@ body {
   color: var(--subtle);
   font-size: 8.8pt;
   font-style: italic;
+  text-align: right;
 }
 
 .role-entry,
 .edu-entry {
   display: grid;
-  grid-template-columns: 23mm 1fr;
+  grid-template-columns: 1fr 23mm;
   gap: 7mm;
   margin-bottom: 6px;
 }
