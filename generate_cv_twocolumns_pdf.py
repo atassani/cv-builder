@@ -7,7 +7,8 @@ Requirements:
     pip install reportlab pillow
 
 Usage:
-    python3 generate_cv_pdf.py cv_toni_tassani.json
+    python3 generate_cv_twocolumns_pdf.py -i cv_toni_tassani.json -o cv_toni_tassani.pdf
+    python3 generate_cv_twocolumns_pdf.py -i cv_toni_tassani.json  # defaults to cv_toni_tassani.pdf
 
 The JSON file is resolved relative to this script unless an absolute path is used.
 Font files should be in a 'fonts/' folder next to this script
@@ -314,7 +315,8 @@ def register_fonts():
 
 def parse_args():
     parser = argparse.ArgumentParser(description="Generate a CV PDF from a JSON data file.")
-    parser.add_argument("cv_json", help="CV JSON file, relative to this script or absolute.")
+    parser.add_argument("-i", "--input", required=True, help="Input JSON file, relative to this script or absolute.")
+    parser.add_argument("-o", "--output", help="Output PDF file. Defaults to <input_basename>.pdf")
     return parser.parse_args()
 
 
@@ -324,13 +326,17 @@ def resolve_path(path_value):
     return os.path.join(SCRIPT_DIR, path_value)
 
 
-def load_cv_data(json_path):
+def load_cv_data(json_path, output_path=None):
     resolved = resolve_path(json_path)
     with open(resolved, "r", encoding="utf-8") as fh:
         data = json.load(fh)
     data["resolved_json_path"] = resolved
     data["photo_path"]  = resolve_path(data["photo_path"])
-    data["output_path"] = resolve_path(data["output_pdf"])
+    if output_path:
+        data["output_path"] = resolve_path(output_path)
+    else:
+        base = os.path.splitext(os.path.basename(resolved))[0]
+        data["output_path"] = os.path.join(SCRIPT_DIR, f"{base}.pdf")
     return data
 
 
@@ -675,7 +681,7 @@ class CV:
 
 def main():
     args = parse_args()
-    data = load_cv_data(args.cv_json)
+    data = load_cv_data(args.input, args.output)
 
     register_fonts()
 

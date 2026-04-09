@@ -7,7 +7,8 @@ The output matches the design of cv_toni_tassani_template.html but is
 generated dynamically from the same JSON file used by the PDF generator.
 
 Usage:
-    python3 generate_cv_html.py cv_toni_tassani.json
+    python3 generate_cv_html.py -i cv_toni_tassani.json -o cv_toni_tassani.html
+    python3 generate_cv_html.py -i cv_toni_tassani.json  # defaults to cv_toni_tassani.html
 """
 
 import argparse
@@ -48,7 +49,8 @@ def inline_svg_icon(name, color=ICON_COLOR, size="1em"):
 
 def parse_args():
     parser = argparse.ArgumentParser(description="Generate a CV HTML from a JSON data file.")
-    parser.add_argument("cv_json", help="CV JSON file path, relative to this script or absolute.")
+    parser.add_argument("-i", "--input", required=True, help="Input JSON file, relative to this script or absolute.")
+    parser.add_argument("-o", "--output", help="Output HTML file. Defaults to <input_basename>.html")
     return parser.parse_args()
 
 
@@ -58,13 +60,16 @@ def resolve_path(path_value):
     return os.path.join(SCRIPT_DIR, path_value)
 
 
-def load_cv_data(json_path):
+def load_cv_data(json_path, output_path=None):
     resolved = resolve_path(json_path)
     with open(resolved, "r", encoding="utf-8") as fh:
         data = json.load(fh)
     data["photo_path"] = resolve_path(data["photo_path"])
-    output_pdf = data["output_pdf"]
-    data["output_html"] = resolve_path(output_pdf.replace(".pdf", ".html"))
+    if output_path:
+        data["output_html"] = resolve_path(output_path)
+    else:
+        base = os.path.splitext(os.path.basename(resolved))[0]
+        data["output_html"] = os.path.join(SCRIPT_DIR, f"{base}.html")
     return data
 
 
@@ -567,7 +572,7 @@ def build_document(data):
 
 def main():
     args = parse_args()
-    data = load_cv_data(args.cv_json)
+    data = load_cv_data(args.input, args.output)
 
     document = build_document(data)
 

@@ -3,7 +3,8 @@
 Generate a Tufte-inspired, ATS-friendly resume HTML from a JSON CV file.
 
 Usage:
-    python3 generate_cv_tufte_html.py cv_toni_tassani.json
+    python3 generate_cv_tufte_html.py -i cv_toni_tassani.json -o cv_toni_tassani_tufte.html
+    python3 generate_cv_tufte_html.py -i cv_toni_tassani.json  # defaults to cv_toni_tassani_tufte.html
 """
 
 import argparse
@@ -31,11 +32,11 @@ def parse_args():
     parser = argparse.ArgumentParser(
         description="Generate a Tufte-inspired resume HTML from a JSON data file."
     )
-    parser.add_argument("cv_json", help="CV JSON file, relative to this script or absolute.")
+    parser.add_argument("-i", "--input", required=True, help="Input JSON file, relative to this script or absolute.")
     parser.add_argument(
         "-o",
         "--output",
-        help="Optional output HTML path. Defaults to <json_basename>_tufte.html",
+        help="Optional output HTML path. Defaults to <input_basename>_tufte.html",
     )
     return parser.parse_args()
 
@@ -46,11 +47,9 @@ def resolve_path(path_value):
     return os.path.join(SCRIPT_DIR, path_value)
 
 
-def derive_output_path(data, json_path, cli_output=None):
+def derive_output_path(json_path, cli_output=None):
     if cli_output:
         return resolve_path(cli_output)
-    if data.get("output_tufte_html"):
-        return resolve_path(data["output_tufte_html"])
     base = os.path.splitext(os.path.basename(json_path))[0]
     return os.path.join(SCRIPT_DIR, f"{base}_tufte.html")
 
@@ -60,7 +59,7 @@ def load_cv_data(json_path, cli_output=None):
     with open(resolved, "r", encoding="utf-8") as fh:
         data = json.load(fh)
     data["resolved_json_path"] = resolved
-    data["output_path"] = derive_output_path(data, resolved, cli_output)
+    data["output_path"] = derive_output_path(resolved, cli_output)
     data["labels"] = {**DEFAULT_LABELS, **data.get("labels", {})}
     return data
 
@@ -508,7 +507,7 @@ def build_document(data):
 
 def main():
     args = parse_args()
-    source_data = load_cv_data(args.cv_json, args.output)
+    source_data = load_cv_data(args.input, args.output)
     data = prepare_resume_data(source_data)
     document = build_document(data)
     with open(source_data["output_path"], "w", encoding="utf-8") as fh:
