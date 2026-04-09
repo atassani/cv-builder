@@ -13,9 +13,13 @@ import html
 import json
 import os
 import re
+import xml.etree.ElementTree as ET
 
 
 SCRIPT_DIR = os.path.dirname(os.path.abspath(__file__))
+ICONS_DIR = os.path.join(SCRIPT_DIR, "icons")
+_SVG_NS = "http://www.w3.org/2000/svg"
+ICON_COLOR = "#5d564e"  # matches --subtle
 
 DEFAULT_LABELS = {
     "summary": "Summary",
@@ -62,6 +66,25 @@ def load_cv_data(json_path, cli_output=None):
     data["output_path"] = derive_output_path(resolved, cli_output)
     data["labels"] = {**DEFAULT_LABELS, **data.get("labels", {})}
     return data
+
+
+def inline_svg_icon(name, color=ICON_COLOR, size="0.85em"):
+    svg_path = os.path.join(ICONS_DIR, f"{name}.svg")
+    if not os.path.exists(svg_path):
+        return ""
+    tree = ET.parse(svg_path)
+    root = tree.getroot()
+    vb = root.get("viewBox", "0 0 512 512")
+    paths_html = "".join(
+        f'<path d="{el.get("d")}" fill="{color}"/>'
+        for el in root.iter()
+        if el.tag in (f"{{{_SVG_NS}}}path", "path") and el.get("d")
+    )
+    return (
+        f'<svg xmlns="http://www.w3.org/2000/svg" viewBox="{vb}" '
+        f'style="height:{size};width:auto;vertical-align:middle;margin-right:3px;" '
+        f'aria-hidden="true">{paths_html}</svg>'
+    )
 
 
 def esc(text):
@@ -311,6 +334,11 @@ body {
   font-size: 10.5pt;
 }
 
+.contact-sep {
+  margin: 0 5px;
+  color: var(--rule);
+}
+
 .header-rule {
   border: 0;
   border-top: 1px solid var(--rule);
@@ -452,14 +480,13 @@ body {
 
 def build_document(data):
     contact = data.get("contact", {})
-    contact_line = compact_join(
-        [
-            contact.get("location", "").strip(),
-            contact.get("phone", "").strip(),
-            contact.get("email", "").strip(),
-            contact.get("linkedin", "").strip(),
-            contact.get("website", "").strip(),
-        ]
+    sep = ' <span class="contact-sep">|</span> '
+    contact_html = (
+        f'{inline_svg_icon("phone")}{esc(contact.get("phone", ""))}{sep}'
+        f'{inline_svg_icon("email")}{esc(contact.get("email", ""))}{sep}'
+        f'{inline_svg_icon("linkedin")}{esc(contact.get("linkedin", ""))}<br>'
+        f'{inline_svg_icon("link")}{esc(contact.get("website", ""))}{sep}'
+        f'{inline_svg_icon("location")}{esc(contact.get("location", ""))}'
     )
 
     return f"""<!DOCTYPE html>
@@ -477,7 +504,7 @@ def build_document(data):
     <header class="header">
       <h1>{esc(data.get("name", ""))}</h1>
       <div class="title">{esc(data.get("title", ""))}</div>
-      <div class="contact-line">{esc(contact_line)}</div>
+      <div class="contact-line">{contact_html}</div>
       <hr class="header-rule">
     </header>
 

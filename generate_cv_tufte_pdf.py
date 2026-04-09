@@ -9,8 +9,10 @@ Usage:
 
 import argparse
 import copy
+from email.mime import text
 import io
 import json
+import math
 import os
 import re
 import sys
@@ -42,7 +44,211 @@ INK = HexColor("#171717")
 SUBTLE = HexColor("#5d564e")
 RULE = HexColor("#d7d0c2")
 
+# ─────────────────────────────────────────────────────────────────────────────
+# ICON PATHS — Font Awesome 6 Free Solid (MIT licence)
+# viewBox height is always 512; width varies per glyph.
+# ─────────────────────────────────────────────────────────────────────────────
+ICON_PATHS = {
+    "phone": (
+        "M164.9 24.6c-7.7-18.6-28-28.5-47.4-23.2l-88 24C12.1 30.2 0 46 0 64"
+        "C0 311.4 200.6 512 448 512c18 0 33.8-12.1 38.6-29.5l24-88"
+        "c5.3-19.4-4.6-39.7-23.2-47.4l-96-40c-16.3-6.8-35.2-2.1-46.3 11.6"
+        "L304.7 368C234.3 334.7 177.3 277.7 144 207.3L193.3 167"
+        "c13.7-11.2 18.4-30 11.6-46.3l-40-96z"
+    ),
+    "email": (
+        "M256 64C150 64 64 150 64 256s86 192 192 192c17.7 0 32 14.3 32 32"
+        "s-14.3 32-32 32C114.6 512 0 397.4 0 256S114.6 0 256 0S512 114.6 512 256"
+        "l0 32c0 53-43 96-96 96c-29.3 0-55.6-13.2-73.2-33.9"
+        "C320 371.1 289.5 384 256 384c-70.7 0-128-57.3-128-128s57.3-128 128-128"
+        "c27.9 0 53.7 8.9 74.7 24.1c5.7-5 13.1-8.1 21.3-8.1"
+        "c17.7 0 32 14.3 32 32l0 80 0 32c0 17.7 14.3 32 32 32s32-14.3 32-32"
+        "l0-32c0-106-86-192-192-192zm64 192a64 64 0 1 0 -128 0 64 64 0 1 0 128 0z"
+    ),
+    "link": (
+        "M579.8 267.7c56.5-56.5 56.5-148 0-204.5c-50-50-128.8-56.5-186.3-15.4"
+        "l-1.6 1.1c-14.4 10.3-17.7 30.3-7.4 44.6s30.3 17.7 44.6 7.4l1.6-1.1"
+        "c32.1-22.9 76-19.3 103.8 8.6c31.5 31.5 31.5 82.5 0 114L422.3 334.8"
+        "c-31.5 31.5-82.5 31.5-114 0c-27.9-27.9-31.5-71.8-8.6-103.8l1.1-1.6"
+        "c10.3-14.4 6.9-34.4-7.4-44.6s-34.4-6.9-44.6 7.4l-1.1 1.6"
+        "C206.5 251.2 213 330 263 380c56.5 56.5 148 56.5 204.5 0L579.8 267.7z"
+        "M60.2 244.3c-56.5 56.5-56.5 148 0 204.5c50 50 128.8 56.5 186.3 15.4"
+        "l1.6-1.1c14.4-10.3 17.7-30.3 7.4-44.6s-30.3-17.7-44.6-7.4l-1.6 1.1"
+        "c-32.1 22.9-76 19.3-103.8-8.6C74 372 74 321 105.5 289.5L217.7 177.2"
+        "c31.5-31.5 82.5-31.5 114 0c27.9 27.9 31.5 71.8 8.6 103.9l-1.1 1.6"
+        "c-10.3 14.4-6.9 34.4 7.4 44.6s34.4 6.9 44.6-7.4l1.1-1.6"
+        "C433.5 260.8 427 182 377 132c-56.5-56.5-148-56.5-204.5 0L60.2 244.3z"
+    ),
+    "location": (
+        "M215.7 499.2C267 435 384 279.4 384 192C384 86 298 0 192 0S0 86 0 192"
+        "c0 87.4 117 243 168.3 307.2c12.3 15.3 35.1 15.3 47.4 0z"
+        "M192 128a64 64 0 1 1 0 128 64 64 0 1 1 0-128z"
+    ),
+    "linkedin": (
+        "M416 32H31.9C14.3 32 0 46.5 0 64.3v383.4C0 465.5 14.3 480 31.9 480"
+        "H416c17.6 0 32-14.5 32-32.3V64.3c0-17.8-14.4-32.3-32-32.3z"
+        "M135.4 416H69V202.2h66.5V416zm-33.2-243c-21.3 0-38.5-17.3-38.5-38.5"
+        "S80.9 96 102.2 96c21.2 0 38.5 17.3 38.5 38.5 0 21.3-17.2 38.5-38.5 38.5z"
+        "m282.1 243h-66.4V312c0-24.8-.5-56.7-34.5-56.7-34.6 0-39.9 27-39.9 54.9"
+        "V416h-66.4V202.2h63.7v29.2h.9c8.9-16.8 30.6-34.5 62.9-34.5"
+        "c67.2 0 79.7 44.3 79.7 101.9V416z"
+    ),
+}
+ICON_WIDTHS = {"phone": 512, "email": 512, "link": 640, "location": 384, "linkedin": 448}
+ICON_UPM = 512
+
+
+def _arc_to_bezier(x1, y1, rx, ry, phi_deg, fa, fs, x2, y2):
+    if x1 == x2 and y1 == y2:
+        return []
+    rx, ry = abs(rx), abs(ry)
+    if rx == 0 or ry == 0:
+        return []
+    phi = math.radians(phi_deg)
+    cp, sp = math.cos(phi), math.sin(phi)
+    dx, dy = (x1 - x2) / 2, (y1 - y2) / 2
+    x1p =  cp * dx + sp * dy
+    y1p = -sp * dx + cp * dy
+    lam = (x1p / rx) ** 2 + (y1p / ry) ** 2
+    if lam > 1:
+        s = math.sqrt(lam); rx *= s; ry *= s
+    num = max(0.0, (rx * ry) ** 2 - (rx * y1p) ** 2 - (ry * x1p) ** 2)
+    den = (rx * y1p) ** 2 + (ry * x1p) ** 2
+    sq = (math.sqrt(num / den) if den > 0 else 0.0) * (-1 if fa == fs else 1)
+    cxp, cyp = sq * rx * y1p / ry, -sq * ry * x1p / rx
+    cx = cp * cxp - sp * cyp + (x1 + x2) / 2
+    cy = sp * cxp + cp * cyp + (y1 + y2) / 2
+
+    def angle(ux, uy, vx, vy):
+        n = math.sqrt((ux * ux + uy * uy) * (vx * vx + vy * vy))
+        if n < 1e-10:
+            return 0.0
+        a = math.acos(max(-1.0, min(1.0, (ux * vx + uy * vy) / n)))
+        return -a if ux * vy - uy * vx < 0 else a
+
+    theta1 = angle(1, 0, (x1p - cxp) / rx, (y1p - cyp) / ry)
+    dtheta = angle((x1p - cxp) / rx, (y1p - cyp) / ry,
+                   (-x1p - cxp) / rx, (-y1p - cyp) / ry)
+    if not fs and dtheta > 0:
+        dtheta -= 2 * math.pi
+    elif fs and dtheta < 0:
+        dtheta += 2 * math.pi
+    n_segs = max(1, math.ceil(abs(dtheta) / (math.pi / 2)))
+    d_seg = dtheta / n_segs
+    beziers = []
+    px, py, t = x1, y1, theta1
+    for _ in range(n_segs):
+        alpha = math.sin(d_seg) * (math.sqrt(4 + 3 * math.tan(d_seg / 2) ** 2) - 1) / 3
+        ct, st = math.cos(t), math.sin(t)
+        dx1 = cp * (-rx * st) - sp * (ry * ct)
+        dy1 = sp * (-rx * st) + cp * (ry * ct)
+        t2 = t + d_seg
+        ct2, st2 = math.cos(t2), math.sin(t2)
+        ex = cp * rx * ct2 - sp * ry * st2 + cx
+        ey = sp * rx * ct2 + cp * ry * st2 + cy
+        dx2 = cp * (-rx * st2) - sp * (ry * ct2)
+        dy2 = sp * (-rx * st2) + cp * (ry * ct2)
+        beziers.append((px + alpha * dx1, py + alpha * dy1,
+                        ex - alpha * dx2, ey - alpha * dy2, ex, ey))
+        px, py, t = ex, ey, t2
+    return beziers
+
+
+def _parse_svg_path(path, d):
+    tokens = re.findall(
+        r'[MmLlHhVvCcSsQqZzAa]|[-+]?(?:\d+\.?\d*|\.\d+)(?:[eE][-+]?\d+)?', d
+    )
+    i = 0
+    cx, cy = 0.0, 0.0
+    mx, my = 0.0, 0.0
+    lcp_x, lcp_y = None, None
+    cmd = 'M'
+
+    def rd(n):
+        nonlocal i
+        vals = [float(tokens[i + j]) for j in range(n)]
+        i += n
+        return vals
+
+    while i < len(tokens):
+        t = tokens[i]
+        if t in 'MmLlHhVvCcSsQqZzAa':
+            cmd = t; i += 1
+        if cmd == 'M':
+            cx, cy = rd(2); path.moveTo(cx, cy)
+            mx, my = cx, cy; lcp_x = None; cmd = 'L'
+        elif cmd == 'm':
+            dx, dy = rd(2); cx += dx; cy += dy
+            path.moveTo(cx, cy); mx, my = cx, cy; lcp_x = None; cmd = 'l'
+        elif cmd == 'L':
+            cx, cy = rd(2); path.lineTo(cx, cy); lcp_x = None
+        elif cmd == 'l':
+            dx, dy = rd(2); cx += dx; cy += dy
+            path.lineTo(cx, cy); lcp_x = None
+        elif cmd == 'H':
+            cx = rd(1)[0]; path.lineTo(cx, cy); lcp_x = None
+        elif cmd == 'h':
+            cx += rd(1)[0]; path.lineTo(cx, cy); lcp_x = None
+        elif cmd == 'V':
+            cy = rd(1)[0]; path.lineTo(cx, cy); lcp_x = None
+        elif cmd == 'v':
+            cy += rd(1)[0]; path.lineTo(cx, cy); lcp_x = None
+        elif cmd == 'C':
+            x1, y1, x2, y2, cx, cy = rd(6)
+            path.curveTo(x1, y1, x2, y2, cx, cy); lcp_x, lcp_y = x2, y2
+        elif cmd == 'c':
+            x1, y1, x2, y2, dx, dy = rd(6)
+            x1 += cx; y1 += cy; x2 += cx; y2 += cy; cx += dx; cy += dy
+            path.curveTo(x1, y1, x2, y2, cx, cy); lcp_x, lcp_y = x2, y2
+        elif cmd in ('S', 's'):
+            x2, y2, ex, ey = rd(4)
+            if cmd == 's':
+                x2 += cx; y2 += cy; ex += cx; ey += cy
+            x1 = 2 * cx - lcp_x if lcp_x is not None else cx
+            y1 = 2 * cy - lcp_y if lcp_y is not None else cy
+            path.curveTo(x1, y1, x2, y2, ex, ey)
+            lcp_x, lcp_y = x2, y2; cx, cy = ex, ey
+        elif cmd in ('Q', 'q'):
+            x1, y1, ex, ey = rd(4)
+            if cmd == 'q':
+                x1 += cx; y1 += cy; ex += cx; ey += cy
+            path.curveTo(cx + 2/3*(x1-cx), cy + 2/3*(y1-cy),
+                         ex + 2/3*(x1-ex), ey + 2/3*(y1-ey), ex, ey)
+            cx, cy = ex, ey; lcp_x = None
+        elif cmd in ('Z', 'z'):
+            path.close(); cx, cy = mx, my; lcp_x = None
+        elif cmd in ('A', 'a'):
+            rx, ry, phi, fa, fs, ex, ey = rd(7)
+            fa, fs = int(fa), int(fs)
+            if cmd == 'a':
+                ex += cx; ey += cy
+            for bz in _arc_to_bezier(cx, cy, rx, ry, phi, fa, fs, ex, ey):
+                path.curveTo(*bz)
+            cx, cy = ex, ey; lcp_x = None
+
+
+def _draw_icon(c, name, x, y, size, color=SUBTLE):
+    scale = size / ICON_UPM
+    c.saveState()
+    c.setFillColor(color)
+    c.setStrokeColor(color)
+    c.transform(scale, 0, 0, -scale, x, y + size * 0.85)
+    p = c.beginPath()
+    _parse_svg_path(p, ICON_PATHS[name])
+    c.drawPath(p, fill=1, stroke=0)
+    c.restoreState()
+
+
+def _icon_w(name, size):
+    return ICON_WIDTHS[name] / ICON_UPM * size
+
+
 DEFAULT_LABELS = {
+    "heading.phone": "Phone",
+    "heading.email": "Email",
+    "heading.linkedin": "LinkedIn",
+    "heading.website": "Website",
+    "heading.location": "Location",
     "summary": "Summary",
     "certifications": "Certifications",
     "training": "Training / Courses",
@@ -356,6 +562,7 @@ class ResumeRenderer:
 
     def draw_header(self, data):
         contact = data.get("contact", {})
+        labels = data.get("labels", {})
         self.c.setFillColor(INK)
         self.c.setFont(FONT_SERIF_BOLD, self.name_size)
         self.c.drawString(self.left, self.y, data.get("name", "").upper())
@@ -366,19 +573,39 @@ class ResumeRenderer:
         self.c.drawString(self.left, self.y, data.get("title", ""))
         self.y -= self.title_size * 1.35
 
-        contact_items = [
-            contact.get("location", "").strip(),
-            contact.get("phone", "").strip(),
-            contact.get("email", "").strip(),
-            contact.get("linkedin", "").strip(),
-            contact.get("website", "").strip(),
+        icon_size = self.meta_size
+        gap_icon = 1.2 * mm
+        gap_item = 4 * mm
+        max_x = PAGE_W - self.right
+        items = [
+            ("phone",    labels["heading.phone"],    contact.get("phone", "")),
+            ("email",    labels["heading.email"],    contact.get("email", "")),
+            ("linkedin", labels["heading.linkedin"], contact.get("linkedin", "")),
+            ("link",     labels["heading.website"],  contact.get("website", "")),
+            ("location", labels["heading.location"], contact.get("location", "")),
         ]
-        contact_text = compact_join(contact_items)
         self.c.setFont(FONT_SANS, self.meta_size)
         self.c.setFillColor(SUBTLE)
-        for line in wrap_text(contact_text, FONT_SANS, self.meta_size, PAGE_W - self.left - self.right):
-            self.c.drawString(self.left, self.y, line)
-            self.y -= self.meta_leading
+        cx = self.left
+        for icon_name, label, text in items:
+            if not text:
+                continue
+            full_label = f"{label}: "
+            item_w = (_icon_w(icon_name, icon_size) + gap_icon
+                      + SW(full_label, FONT_SANS, self.meta_size)
+                      + SW(text, FONT_SANS, self.meta_size))
+            if cx > self.left and cx + item_w > max_x:
+                self.y -= self.meta_leading
+                cx = self.left
+            _draw_icon(self.c, icon_name, cx, self.y, icon_size)
+            cx += _icon_w(icon_name, icon_size) + gap_icon
+            self.c.setFont(FONT_SANS, self.meta_size)
+            self.c.setFillColor(SUBTLE)
+            self.c.drawString(cx, self.y, full_label)
+            cx += SW(full_label, FONT_SANS, self.meta_size)
+            self.c.drawString(cx, self.y, text)
+            cx += SW(text, FONT_SANS, self.meta_size) + gap_item
+        self.y -= self.meta_leading
 
         self.y -= 2 * mm
         self.draw_rule()

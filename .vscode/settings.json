@@ -1,0 +1,8 @@
+{
+    "chat.tools.terminal.autoApprove": {
+        "/^source \\.venv/bin/activate && python3 generate_cv_tufte_html\\.py -i cv_toni_tassani\\.json -o cv_tufte_test\\.html && echo \"✓ Tufte HTML generated successfully\"$/": {
+            "approve": true,
+            "matchCommandLine": true
+        }
+    }
+}

@@ -7,9 +7,14 @@
     "email": "toni.tassani@gmail.com",
     "linkedin": "linkedin.com/in/tonitassani",
     "website": "humblyproud.com",
-    "location": "Barcelona"
+    "location": "Barcelona, Spain"
   },
   "labels": {
+    "heading.phone": "Phone",
+    "heading.email": "Email",
+    "heading.linkedin": "LinkedIn",
+    "heading.website": "Website",
+    "heading.location": "Location",
     "summary": "Summary",
     "certifications": "Certifications",
     "training": "Training / Courses",
